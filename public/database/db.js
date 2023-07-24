@@ -6,11 +6,12 @@ const firebaseConfig = {
 	messagingSenderId: "1010427828241",
 	appId: "1:1010427828241:web:149e2d8d6cec79f39ff9b0",
 	measurementId: "G-GWG7QVFJ2J"
-};
+}; 
 // const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+
 
 
 class API {
@@ -94,6 +95,15 @@ class API {
 
     //     return 'success';
     // }
+    async getData() {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/auth.user
+            // ...
+          } else {
+            // No user is signed in.
+          }
+    }
 }
 
 const DB_API = new API();
