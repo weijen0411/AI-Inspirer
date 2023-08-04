@@ -1,0 +1,302 @@
+* {
+    box-sizing: border-box
+}
+
+body {
+    background-color: #C5B9AA;
+}
+
+.root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab_css {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #C5B9AA;
+    /* flex: 0 0 20%; */
+}
+
+
+.tab_content {
+    position: relative;
+    order: 1;
+    display: flex;
+    width: 100%;
+    height: 90%;
+    line-height: 1.6;
+    background-color: #C5B9AA;
+}
+
+
+.content {
+    justify-content: center;
+    margin: 8% 0;
+    width: 100%;
+    height: 85%;
+}
+
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: rotateZ(-3deg);
+    }
+
+    20%,
+    80% {
+        transform: rotateZ(6deg);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: rotateZ(-12deg);
+    }
+
+    40%,
+    60% {
+        transform: rotateZ(12deg);
+    }
+}
+
+.classbutton1 {
+    /* top: 50%; */
+    display: inline-flex;
+    font-size: 45px;
+    width: 20%;
+    height: 90%;
+    margin: auto 2%;
+    border-radius: 30px;
+    background-color: #6D5D53;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    font-weight: 900;
+    border: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.classbutton1::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: 1rem;
+    height: 1rem;
+    transform: translate3d(-50%, -50%, 0) scale(0, 0);
+    border-radius: 50%;
+    background-color: #554941;
+    transform-origin: center;
+    transition: ease-in-out .5s;
+}
+
+.classbutton1.unlocked:hover::before {
+    transform: translate3d(-50%, -50%, 0) scale(35, 35);
+}
+
+.classbutton1:active {
+    transform: scale(.95);
+    box-shadow: inset 0 0 10px 1px rgba(0, 0, 0, .2);
+}
+
+.classbutton2 {
+    display: inline-flex;
+    font-size: 45px;
+    width: 300px;
+    height: 300px;
+    margin: 0% 2%;
+    border-radius: 30px;
+    background-color: #E0B36F;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    font-weight: bold;
+    border: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.classbutton2::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: 1rem;
+    height: 1rem;
+    transform: translate3d(-50%, -50%, 0) scale(0, 0);
+    border-radius: 50%;
+    background-color: #cd9e58;
+    transform-origin: center;
+    transition: ease-in-out .5s;
+}
+
+.classbutton2.unlocked:hover::before {
+    transform: translate3d(-50%, -50%, 0) scale(35, 35);
+}
+
+.classbutton2:active {
+    transform: scale(.95);
+    box-shadow: inset 0 0 10px 1px rgba(0, 0, 0, .2);
+}
+
+.classbutton3 {
+    display: inline-flex;
+    font-size: 45px;
+    width: 300px;
+    height: 300px;
+    margin: 0% 0% 0 2%;
+    border-radius: 30px;
+    background-color: #CDA584;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    font-weight: bold;
+    border: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.classbutton3::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: 1rem;
+    height: 1rem;
+    transform: translate3d(-50%, -50%, 0) scale(0, 0);
+    border-radius: 50%;
+    background-color: #cc9970;
+    transform-origin: center;
+    transition: ease-in-out .5s;
+}
+
+.classbutton3.unlocked:hover::before {
+    transform: translate3d(-50%, -50%, 0) scale(35, 35);
+}
+
+.classbutton3:active {
+    transform: scale(.95);
+    box-shadow: inset 0 0 10px 1px rgba(0, 0, 0, .2);
+}
+
+.classbutton4 {
+    display: inline-flex;
+    font-size: 45px;
+    width: 300px;
+    height: 300px;
+    margin: 3% 2% 0 2%;
+    border-radius: 30px;
+    background-color: #867b6f;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    font-weight: bold;
+    border: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.classbutton4::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: 1rem;
+    height: 1rem;
+    transform: translate3d(-50%, -50%, 0) scale(0, 0);
+    border-radius: 50%;
+    background-color: #686057;
+    transform-origin: center;
+    transition: ease-in-out .5s;
+}
+
+.classbutton4.unlocked:hover::before {
+    transform: translate3d(-50%, -50%, 0) scale(35, 35);
+}
+
+.classbutton4:active {
+    transform: scale(.95);
+    box-shadow: inset 0 0 10px 1px rgba(0, 0, 0, .2);
+}
+
+
+.back {
+    font-size: 90px;
+    font-weight: bold;
+    color: white;
+    line-height: 0.8;
+    text-decoration: none;
+    display: block;
+    float: left;
+    margin: 5% 2% 0 3%;
+}
+
+.logout {
+    font-size: 20px;
+    width: 80px;
+    height: 40px;
+    margin-top: 20px;
+    margin-right: 2%;
+    color: #EDE7DB;
+    background-color: #4F3527;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    line-height: 40px;
+    border: 2px solid #C5B9AA;
+    border-radius: 15px;
+    position: relative;
+    transition: all .3s linear;
+    display: flex;
+    float: right;
+}
+
+.logout > p{
+    position: relative;
+    z-index: 1;
+}
+.logout::before{
+    content: "";
+    width: 0%;
+    height: 0%;
+    /* display: block; */
+    background-color: #C5B9AA;
+    border: 2px solid #4F3527;
+    font-weight: bold;
+    border-radius: 15px;
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    opacity: 0;
+    transition: all .2s ease;
+}
+.logout:hover{
+    color: #4F3527;
+    font-weight: bold;
+}
+.logout:hover::before{
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+}
+
+.logout:active {
+    transform: scale(.95);
+    box-shadow: inset 0 0 10px 1px rgba(0, 0, 0, .2);
+    transition: all .01s;
+  }

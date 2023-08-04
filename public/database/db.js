@@ -6,15 +6,15 @@ const firebaseConfig = {
 	messagingSenderId: "1010427828241",
 	appId: "1:1010427828241:web:149e2d8d6cec79f39ff9b0",
 	measurementId: "G-GWG7QVFJ2J"
-}; 
+};
 // const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-
-
 class API {
+
+    
     //取得所有使用者資料
     async getUsers() {
         const getUsers = await db.collection('users').get();
@@ -33,31 +33,25 @@ class API {
         return 'logged in';
     }
 
-    //輸入:帳號、課程名稱、章節
-    //完成課程
-    // async finishCourse(account, courseName, chapter) {
-    //     const getUser = await db.collection('users').where('account', '==', account).get();
-    //     if (getUser.empty) return 'user not found';
+    async addUsers(postData) {
+        const dbref = await db.collection("users").doc();
+        dbref.set(postData);
+    }
 
-    //     const getCourse = await getUser.docs[0].ref.collection('courses').where('courseName', '==', courseName).get();
+    async updateUsers(newData) {
+        // const getUser = (await db.collection('users').where('account', '==', account).get()).docs[0];
+        // if (!getUser) return 'user not found';
+        const dbref = await db.collection("users").doc();
+        return dbref.update(newData);
+    }
 
-    //     const updateData = {};
-    //     updateData[chapter] = true;
-    //     await getCourse.docs[0].ref.update(updateData);
-
-    //     return 'success';
-    // }
-
-    // //輸入:帳號
-    // //輸出:該帳號上課進度
-    // async getCourseProgress(account) {
-    //     const getUser = (await db.collection('users').where('account', '==', account).get()).docs[0];
-    //     if (!getUser) return 'user not found';
-
-    //     const getCourses = await getUser.ref.collection('courses').get();
-
-    //     return getCourses.docs.map(course => course.data());
-    // }
+    //輸入:帳號
+    //輸出:該帳號資料
+    async getUserdata(account) {
+        const getUser = await db.collection('users').where('account', '==', account).get();
+        if (!getUser) return 'user not found';
+        return getUser.docs[0].data();
+    }
 
     // //輸入:帳號
     // //輸出:該帳號所有測驗紀錄
@@ -95,15 +89,6 @@ class API {
 
     //     return 'success';
     // }
-    async getData() {
-        if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/auth.user
-            // ...
-          } else {
-            // No user is signed in.
-          }
-    }
 }
 
 const DB_API = new API();

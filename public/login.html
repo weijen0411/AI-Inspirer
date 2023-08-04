@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入系統</title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+</head>
+
+<body>
+    <div class="container" align="center">
+        <br><br><a class="logintext">登入系統</a>
+        <input class="login" id="account" type="text" placeholder="學號">
+        <input class="login" id="password" type="password" placeholder="密碼">
+
+        <button class="loginbtn" id="login">
+            <p>登入</p>
+        </button>
+        <button class="alreadybtn" id="login" onclick="window.location.href='./index.html'">
+            <p>還沒有帳號？</p>
+        </button>
+    </div>
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+<script src="./database/db.js"></script>
+<script>
+        //取得網頁上的元件
+        const accountInput = document.querySelector('#account');
+        const passwordInput = document.querySelector('#password');
+        const loginBtn = document.querySelector('#login');
+
+        //把登入事件綁定給按鈕
+        //function前記得加async
+        //所有DB_API...的操作前加await
+        loginBtn.onclick = async () => {
+            const account = accountInput.value;
+            const password = passwordInput.value;
+
+            //確定輸入框都不是空的
+            if(!account || !password)
+                return alert('請輸入帳號跟密碼');
+
+            const userLogin = await DB_API.getUser(account,password);
+
+            if(userLogin === 'user not found') alert('未找到該帳號');
+            else if (userLogin === 'wrong password') alert('密碼錯誤');
+            else if(userLogin === 'logged in') {
+                sessionStorage.setItem('account',account);
+                location.assign('./select.html');
+            }
+        }
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+
+</html>
