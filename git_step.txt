@@ -1,0 +1,68 @@
+1 設定資料 
+    1. git config --global user.name "Steven"
+    2. git config --global user.email "silvercrow7777@gmail.com"
+
+#2 初始化
+    1. git init     // 創建 .git 隱藏文件夾，會保存每個，會保存每個git版本紀錄和變化
+
+#3 將文件加入到git版本控制系統
+    1. git add 文件名
+    2. git add .   // . 代表當前目錄的所有文件
+
+#4 將加入的變更，提交成一個固定版本
+    1.Vim
+        1. git commit
+        2. 輸入 a 或 i 進入編輯模式
+        3. 寫入你要提交版本的文字說明
+        4. ESC 退出編輯模式，輸入英文文字下的 :wq ，Enter後即完成退出
+
+    2.簡化版
+        1. git commit -m "輸入文字內容" 
+
+#5 想回退到之前更改的某個版本
+    1. git，找到那一次的提交 commit_id
+    2. git reset --hard commit_id   // --hard 硬切換
+
+#6 使用branch可以來回切換版本 (!非常重要!)
+    1. git branch branch_name   // 會在當前的主流上，創建分支，名稱可自行輸入(branch_name)
+    2. git branch -a    // 查看所有分支
+    3. git checkout branch_name     // 切換到指定支流，這樣可以同時在主流或支流上Coding
+    4. git merge branch_name    // 可以將你想合併進來的分支，併到當前的流線上
+
+
+
+## 如何參與開源項目 ##
+    # Github
+        1. 到想參與的項目，點集右上角Fork
+        2. 右上角回到自己的倉庫，會有一個剛剛複製過來的項目
+        3. 點擊 code，複製 https 連結 
+    # Vscode
+        1. git clone https連結 .    // 連結後面要記得空格加 . (句號)不要忘記!
+        2. git remote -v    // 發現只有自己倉庫的連結
+        3. git remote add upstream 想參與項目的https    // 再一次第三步，會發現有了一個上游的代碼庫
+        
+        // 想要給項目加一些功能，以下
+        1. git checkout -b branch_name  // 創建並切換進入分支
+        2. 編輯你要新增的功能。
+            git add . 
+            git commit -m "文字內容"
+            git push -u origin branch_name  // 第一次push，後面要輸入參數指定 源 還有 分支，之後就只要 git push 即可
+
+        // 若項目有被更新過，以下
+        1. git fetch upstream   // 從上游更新最新代碼
+        2. git merge upstream/main // 把遠程的最新代碼合併到自己的分支當中
+        3. git push 
+
+## vscode 自帶git操作 ##
+    # git add 和 git commit #
+        1. 左邊的 source control
+        2. 改動文件後，點及左上方的打勾按鈕，確認提交
+        3. 點端會跳出輸入框，輸入要更新的訊息即可
+
+
+
+## 補充 ##
+    1. git log  // 可以看每次提交的信息 
+    2. 已安裝git history differ(這是高級插建)，可以直接又見查看歷史紀錄
+    3. git remote add origin github的repository     // 會告訴git要上傳到哪裡
+    4. git push -u origin main  //上傳到github
