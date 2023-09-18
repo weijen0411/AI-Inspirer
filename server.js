@@ -34,8 +34,11 @@ const botName = " 系統 ";
 io.on("connection", (socket) => {
   console.log(io.of("/").adapter);
   socket.on("joinRoom", ({ username, room }) => {
+    var roomusers = getRoomUsers(room);
+    var roomuserCount = (roomusers === null) ? 0 : roomusers.length;
+    
+    if (roomuserCount < 2){
     const user = userJoin(socket.id, username, room);
-
     socket.join(user.room);
 
     // Welcome current user
@@ -54,6 +57,10 @@ io.on("connection", (socket) => {
       room: user.room,
       users: getRoomUsers(user.room),
     });
+    } else if(roomuserCount >=2){
+      console.log('Room is full');
+      socket.emit('loginFail', '')
+    }
   });
 
   // Listen for chatMessage

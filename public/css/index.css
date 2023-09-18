@@ -1,5 +1,5 @@
 body {
-    background-color: #4F3527;
+    background-color:#464646;
 }
 
 .container {
@@ -11,14 +11,14 @@ body {
     height: 470px;
     margin-left: -400px;
     margin-top: -200px;   
-    background-color: #EDE7DB;
+    background-color: #cfc8c3;
     border-radius: 25px;
 }
 
 .logintext {
     font-size: 60px;
     font-weight: bold;
-    color: #4F3527;
+    color: #464646;
 }
 
 .login {
@@ -35,8 +35,8 @@ body {
     width: 80px;
     height: 40px;
     margin-top: 10px;
-    color: #EDE7DB;
-    background-color: #4F3527;
+    color: #cfc8c3;
+    background-color: #464646;
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -58,7 +58,7 @@ body {
     height: 0%;
     /* display: block; */
     background-color: #C5B9AA;
-    border: 2px solid #4F3527;
+    border: 2px solid #464646;
     font-weight: bold;
     border-radius: 15px;
     position: absolute;
@@ -68,7 +68,7 @@ body {
     transition: all .2s ease;
 }
 .loginbtn:hover{
-    color: #4F3527;
+    color: #464646;
     font-weight: bold;
 }
 .loginbtn:hover::before{
@@ -84,7 +84,7 @@ body {
   }
 
 .alreadybtn {
-    background-color: #EDE7DB;
+    background-color: #cfc8c3;
     border: none;
     text-align: center;
     font-size: 20px;

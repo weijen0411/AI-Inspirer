@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 body {
-    background-color: #cfc8c3;
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
 }
 
 .root {
@@ -17,6 +19,7 @@ body {
 .footer {
     width: 90%;
     flex: 0 1 75%;
+    padding: 10px;
     font-size: 30px;
     margin-left: 3%;
     margin-top: 2%;
@@ -26,10 +29,10 @@ body {
     width: 100%;
     height: 20%;
     z-index: 2;
-    font-size: 120px;
+    font-size: 100px;
     font-weight: bold;
-    color: #4F3527;
-    text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
+    color: #464646;
+    /* text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2); */
     letter-spacing: 10px;
     margin-left: 3%;
 }
@@ -50,7 +53,7 @@ body {
     margin-top: 10px;
     margin-left: 150px;
     color: #EDE7DB;
-    background-color: #4F3527;
+    background-color: #464646;
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -67,21 +70,128 @@ body {
     z-index: 1;
 }
 
-.back {
-    font-size: 90px;
-    font-weight: bold;
-    color: #cd9e58;
-    line-height: 0.8;
-    text-decoration: none;
-    display: block;
-    float: left;
-    position: absolute;
-    margin: 0 0 2.3% 2%;
-    left: 0;
-    bottom: 0;
-
-    &:hover {
-        cursor: pointer;
-    }
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+span, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
 }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+a{
+	text-decoration: none;
+}
+
+
+        section{
+            width: 100%;
+            margin: auto;
+            background-color: #cfc8c3;
+            
+        }
+        .nav{
+            width: 1280px;
+            margin: auto;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav ul{
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .nav li{
+            padding: 0 10px;
+            
+        }
+        .nav a{
+            text-decoration: none;
+            text-align: center;
+            font-size: 18px;
+            color: #464646;
+            margin: 0 15px;
+            position: relative;
+        }
+        .nav .logo {
+            margin-right: 1em;
+			display: flex;
+			align-items: center;
+        }
+        .nav span {
+            font-size: 45px;
+            font-weight: 500;
+            color: #464646;
+        }
+        .nav .fa-spotify {
+            padding-right: 2em;
+            color: #464646;
+        }
+        .nav .active a{
+            border-bottom: 1px solid #464646;
+        } 
+        .nav li a:hover{
+            border-bottom: 1px solid #464646;
+            transition: .3s;
+        }
+        .nav li:not(:first-child) a::after{ 
+            content: '';
+            position: absolute;
+            display: block;
+            right: -15px;
+            top:7px;
+            height: 0px;
+            width: 0px;
+            /* border-top:5px solid #464646;
+            border-bottom:4px solid transparent;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent; */
+            } 
+
+        .nav .btn{
+            padding: 20px 30px;
+            border: 1px solid #464646;
+            border-radius: 5px;
+        }
+        .nav .btn:hover{
+            border: 1px solid #C5B9AA;
+            background-color: #C5B9AA;
+            transition: .3s;
+        }
 

@@ -7,30 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/select.css">
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
 </head>
 
 <body >
-    <button class="logout" onclick="window.location.href='./login.html'"><p>登出</p></button>
-    <!-- <div class="root"> -->
-        <div class="tab_css">
-            <div class="tab_content">
-                <div align="center" class="content">
-                    <button class="classbutton4 unlocked" id="record-1"
-                        onclick="window.location.href='./record.html'">個人主頁</button>
-                    <button class="classbutton2 unlocked" id="record-2"
-                        onclick="window.location.href='./entry.html'">討論室</button>
-                    <button class="classbutton3 unlocked" id="record-3"
-                        onclick="window.location.href='./.html'">題目測驗</button>
-
-                    <div><a class="back" href="index.html">⇦</a></div>
-                </div>
+    <section>
+        <div class="nav">
+            <a href="select.html" class="logo">
+                <i class="fa fa-book fa-3x" aria-hidden="true"></i>&nbsp;&nbsp;
+                <span>NAME</span>
+            </a>
+            <div class="navbar">
+                <ul>
+                    <li><a href="record.html">個人主頁</a></li>
+                    <li><a href="entry.html">討論室</a></li>
+                    <li><a href="#">題目測驗</a></li>
+                    <li><a href="http://localhost:8501/">問答</a></li>
+                    <li><a href="calendar.html">行事曆</a></li>
+                    <a href="index.html" class="btn">登出</a>
+                </ul>
             </div>
-
+            
         </div>
-    <!-- </div> -->
+    </section>
 
-
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
     <script src="./database/db.js"></script>

@@ -10,21 +10,39 @@
 </head>
 
 <body>
+    <section>
+        <div class="nav">
+            <a href="select.html" class="logo">
+                <i class="fa fa-book fa-3x" aria-hidden="true"></i>&nbsp;&nbsp;
+                <span>NAME</span>
+            </a>
+            <div class="navbar">
+                <ul>
+                    <li class="active"><a href="record.html">個人主頁</a></li>
+                    <li><a href="entry.html">討論室</a></li>
+                    <li><a href="#">題目測驗</a></li>
+                    <li><a href="http://localhost:8501/">問答</a></li>
+                    <li><a href="calendar.html">行事曆</a></li>
+                    <a href="index.html" class="btn">登出</a>
+                </ul>
+            </div>
+            
+        </div>
+    </section><br>
     <div class="root">
         <div class="head">
             <a class="title">個人資料</a>
         </div>
         <div class="footer">
-        姓名：<input class= "info" id='name' type="text"><br>
-        帳號：<input class= "info" id='account' type="text"><br>
-        密碼：<input class= "info" id='password' type="text"><br>
-        <button class="updatebtn" id='updatebtn'>
-            <p>更新</p></button>
+            <label>姓名：<label class= "info" id="name" type="text"></label></label><br><br>
+            <label>帳號：<label class= "info" id="account" type="text"></label></label><br><br>
+            <label>密碼：<label class= "info" id="password" type="text"></label></label><br><br>
+        <!-- <button class="updatebtn" id='updatebtn'>
+            <p>更新</p></button> -->
         </div>
-
-        <div><a class="back">⇦</a></div>
     </div>
 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
     <script src="./database/db.js"></script>
@@ -37,36 +55,36 @@
             const { account } = sessionStorage;
 
             const write = await DB_API.getUserdata(account);
-            nametInput.value = write.name;
-            accountInput.value = write.account;
-            passwordInput.value = write.password;
+            nametInput.textContent = write.name;
+            accountInput.textContent = write.account;
+            passwordInput.textContent = write.password;
             // console.log(write);               
         }
         fetchData();
 
-        updatebtn.onclick = async () => {
-            const { account } = sessionStorage;
-            // const name = nametInput.value;
-            // const account = accountInput.value;
-            // const password = passwordInput.value;
-            //確定輸入框都不是空的
-            if(!account || !password)
-                return alert('請輸入帳號跟密碼');
+        // updatebtn.onclick = async () => {
+        //     const { account } = sessionStorage;
+        //     // const name = nametInput.value;
+        //     // const account = accountInput.value;
+        //     // const password = passwordInput.value;
+        //     //確定輸入框都不是空的
+        //     if(!account || !password)
+        //         return alert('請輸入帳號跟密碼');
             
-            const update = await DB_API.getUser(account,password);
-            if(update) {
-                const newData = {
-                name:$('#name').val(),
-                account:$('#account').val(),
-                password:$('#password').val()
-                };
-                await DB_API.updateUsers(newData);
-                alert('更改成功');
-        }
+        //     const update = await DB_API.getUser(account,password);
+        //     if(update) {
+        //         const newData = {
+        //         name:$('#name').val(),
+        //         account:$('#account').val(),
+        //         password:$('#password').val()
+        //         };
+        //         await DB_API.updateUsers(newData);
+        //         alert('更改成功');
+        // }
                   
             // location.assign('./login.html', 2000);
             
-        }
+        // }
     </script>
 </body>
 
