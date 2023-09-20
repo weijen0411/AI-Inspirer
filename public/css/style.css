@@ -57,6 +57,19 @@ a {
 	justify-content: space-between;
 }
 
+.chat-header .btn {
+	padding: 9px 25px;
+	border: 1px solid #C5B9AA;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.chat-header .btn:hover {
+	border: 1px solid #C5B9AA;
+    background-color: #C5B9AA;
+    transition: .3s;
+}
+
 .chat-main {
 	display: grid;
 	grid-template-columns: 1fr 3fr;
