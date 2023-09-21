@@ -1,1 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+#calendar {
+    width: 65%;
+    height: 85%;
+    margin: 0 auto; /* 將左右外邊距設為auto，實現水平居中 */
+    margin-top: 1%;
+  }
