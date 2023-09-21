@@ -1,0 +1,9 @@
+cmd 
+
+1. cd D:\Redis-x64-5.0.14.1
+
+2. redis-server.exe redis.windows.conf
+
+cmd
+
+1. node server.js
