@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
+    locale: 'zh-tw',
     editable: true,  
     dayMaxEvents: true,
     events: [
