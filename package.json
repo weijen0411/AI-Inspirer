@@ -11,6 +11,8 @@
   "author": "Brad Traversy",
   "license": "MIT",
   "dependencies": {
+    "@fullcalendar/core": "^6.1.9",
+    "@fullcalendar/interaction": "^6.1.9",
     "@socket.io/redis-adapter": "^7.1.0",
     "dotenv": "^14.3.2",
     "espress": "0.0.0",

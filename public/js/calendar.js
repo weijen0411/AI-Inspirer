@@ -1,17 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
+  var Calendar = FullCalendar.Calendar;
+  var Draggable = FullCalendar.Draggable;
+
+  var containerEl = document.getElementById('external-events');
   var calendarEl = document.getElementById('calendar');
-  var today = new Date();
+  var checkbox = document.getElementById('drop-remove');
+
+  new Draggable(containerEl, {
+    itemSelector: '.fc-event',
+    eventData: function(eventEl) {
+      return {
+        title: eventEl.innerText
+      };
+    }
+  });
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    initialDate: today.toISOString().split('T')[0],
+    // initialView: 'dayGridMonth',
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
     },
-    editable: true,  
+    locale: 'zh-tw',
+    weekNumbers: true,
+    navLinks: true, // can click day/week names to navigate views
+    selectable: true,
+    editable: true,
+    droppable: true, // this allows things to be dropped onto the calendar  
     dayMaxEvents: true,
+    drop: function(info) {
+      // is the "remove after drop" checkbox checked?
+      if (checkbox.checked) {
+        // if so, remove the element from the "Draggable Events" list
+        info.draggedEl.parentNode.removeChild(info.draggedEl);
+      }
+    },
     events: [
       {
         title: 'All Day Event',
@@ -78,4 +102,5 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   calendar.render();
+
 });
