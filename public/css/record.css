@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-body {
+/* body {
     background-color: white;
     font-family: 'Roboto', sans-serif;
-}
+} */
 
 .root {
     width: 100%;
@@ -29,7 +29,7 @@ body {
     width: 100%;
     height: 20%;
     z-index: 2;
-    font-size: 100px;
+    font-size: 4rem;
     font-weight: bold;
     color: #464646;
     /* text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2); */
@@ -43,10 +43,10 @@ body {
     height: 35px;
     margin: 20px 0;
     border-radius: 15px;
-    font-size: 25px;
+    font-size: 2rem;
 }
 
-.updatebtn {
+/* .updatebtn {
     font-size: 25px;
     width: 90px;
     height: 50px;
@@ -68,5 +68,5 @@ body {
 .updatebtn > p{
     position: relative;
     z-index: 1;
-}
+} */
 
