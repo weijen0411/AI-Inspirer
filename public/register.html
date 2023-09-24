@@ -17,7 +17,7 @@
         <input class="login" id="account" type="text" placeholder="帳號">
         <input class="login" id="password" type="password" placeholder="密碼">
 
-        <button class="loginbtn" id="login">
+        <button class="loginbtn" id="register">
             <p>註冊</p>
         </button>
         <button class="alreadybtn" id="login" onclick="window.location.href='./index.html'">
@@ -30,45 +30,7 @@
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
 <script src="./database/db.js"></script>
-<script>
-        //取得網頁上的元件
-        const nametInput = document.querySelector('#name');
-        const accountInput = document.querySelector('#account');
-        const passwordInput = document.querySelector('#password');
-        const loginBtn = document.querySelector('#login');
-
-        loginBtn.onclick = async () => {
-            const name = nametInput.value;
-            const account = accountInput.value;
-            const password = passwordInput.value;
-            //確定輸入框都不是空的
-            if(!account || !password)
-                return alert('請輸入帳號跟密碼');
-            const postData = {
-            name:$('#name').val(),
-            account:$('#account').val(),
-            password:$('#password').val()
-            };
-            const userLogin = await DB_API.getUser(account,password);
-            // const usersignup = await 
-            if(userLogin === 'user not found') {
-                await DB_API.addUsers(postData);
-                alert('註冊成功');
-                sessionStorage.setItem('account',account);
-                // location.assign('./login.html');
-                }
-                
-            else alert('帳號已存在');
-
-            
-            // location.assign('./login.html', 2000);
-            
-        }
-
-       
-            
-        
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+<script src="./js/register.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
 
 </html>

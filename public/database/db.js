@@ -34,14 +34,20 @@ class API {
     }
 
     async addUsers(postData) {
-        const dbref = await db.collection("users").doc();
-        dbref.set(postData);
+        try {
+            const dbref = await db.collection("users").doc();
+            await dbref.set(postData);
+            return true; // 返回成功状态
+        } catch (error) {
+            throw error; // 抛出错误，以便在调用方进行错误处理
+        }
     }
 
     async updateUsers(newData) {
         // const getUser = (await db.collection('users').where('account', '==', account).get()).docs[0];
         // if (!getUser) return 'user not found';
         const dbref = await db.collection("users").doc();
+        console.log(dbref);
         return dbref.update(newData);
     }
 
