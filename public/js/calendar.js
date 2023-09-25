@@ -17,8 +17,9 @@ document.addEventListener('DOMContentLoaded', async function() {
           // 在這裡你可以處理用戶輸入的標題
           if (eventTitle == null || "") {
             alert('您取消了輸入。');
-          }
-          else {
+          } else if (eventTitle == "") {
+            alert('沒有輸入名稱');
+          } else {
             const eventData = {
               title: eventTitle,
               start: sessionStorage.getItem('start'),
@@ -102,7 +103,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         end: info.event.endStr
       };
       await DB_API.updateEvent(userId, eventId, eventData);
-      
+
     }
   });
 
