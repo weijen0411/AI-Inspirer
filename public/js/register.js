@@ -21,14 +21,13 @@ const userLogin = await DB_API.getUser(account,password);
 if(userLogin === 'user not found') {
     try {
         const writePromise = await DB_API.addUsers(postData);
-
         // 使用 confirm 对话框替代 alert
         const confirmed = confirm('註冊成功!');
         if (confirmed) {
             // 如果用户确认，等待数据库写入完成后进行页面导航
-            await writePromise;
-            sessionStorage.setItem('account', account);
-            location.assign('./index.html'); // 寫入成功後進行導航
+            if (writePromise) {
+                location.assign('./index.html'); // 寫入成功後進行導航
+            }
         }
     } catch (error) {
         console.error('註冊失敗', error); // 處理寫入失敗的情況
