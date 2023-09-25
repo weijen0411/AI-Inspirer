@@ -19,7 +19,9 @@ loginBtn.onclick = async () => {
     if(userLogin === 'user not found') alert('未找到該帳號');
     else if (userLogin === 'wrong password') alert('密碼錯誤');
     else if(userLogin === 'logged in') {
+        const userId = await DB_API.getUserID(account, password);
         sessionStorage.setItem('account',account);
+        sessionStorage.setItem('userId', userId);
         location.assign('./select.html');
     }
 }

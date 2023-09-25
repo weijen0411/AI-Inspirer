@@ -11,10 +11,11 @@ const password = passwordInput.value;
 //確定輸入框都不是空的
 if(!account || !password)
     return alert('請輸入帳號跟密碼');
+
 const postData = {
-name:$('#name').val(),
-account:$('#account').val(),
-password:$('#password').val()
+    name:$('#name').val(),
+    account:$('#account').val(),
+    password:$('#password').val()
 };
 const userLogin = await DB_API.getUser(account,password);
 // const usersignup = await 

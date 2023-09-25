@@ -26,16 +26,35 @@ class API {
     async getUser(account, password) {
         const getUser = await db.collection('users').where('account', '==', account).get();
         if (getUser.empty) return 'user not found';
-
         const userData = getUser.docs[0].data();
         if (userData.password !== password) return 'wrong password';
 
         return 'logged in';
     }
 
+    async getUserID(account, password) {
+        try {
+            const querySnapshot = await db.collection('users')
+                .where('account', '==', account)
+                .where('password', '==', password)
+                .get();
+            if (!querySnapshot.empty) {
+                // 如果找到匹配的用户记录，您可以获取第一个匹配的事件的ID
+                const userID = querySnapshot.docs[0].id;
+                return userID;
+            } else {
+                console.log('未找到符合的使用者紀錄');
+                return null; // 或者可以返回其他适当的值，表示未找到匹配记录
+            }
+        } catch (error) {
+            console.error('查詢出错:', error);
+            return null; // 处理错误情况，也可以返回其他适当的值
+        }
+    }
+
     async addUsers(postData) {
         try {
-            const dbref = await db.collection("users").doc();
+            const dbref = await db.collection('users').doc();
             await dbref.set(postData);
             return true; // 返回成功状态
         } catch (error) {
@@ -46,8 +65,7 @@ class API {
     async updateUsers(newData) {
         // const getUser = (await db.collection('users').where('account', '==', account).get()).docs[0];
         // if (!getUser) return 'user not found';
-        const dbref = await db.collection("users").doc();
-        console.log(dbref);
+        const dbref = await db.collection('users').doc();
         return dbref.update(newData);
     }
 
@@ -59,6 +77,100 @@ class API {
         return getUser.docs[0].data();
     }
 
+    async getEventData(userId) {
+        try {
+            // 先在 "users" 集合中查找用户文档
+            const userRef = db.collection('users').doc(userId);
+            const userDoc = await userRef.get();
+    
+            // 检查用户文档是否存在
+            if (!userDoc.exists) {
+                return 'User not found';
+            }
+    
+            // 然后在 "events" 集合中查找名为 "test" 的事件文档
+            const eventRef = userRef.collection('events');
+            const eventsSnapshot = await eventRef.get();
+            
+            const eventsData = [];
+            eventsSnapshot.forEach((doc) => {
+                const eventData = doc.data();
+                // 将文档的ID添加到事件数据中
+                eventData.id = doc.id;
+                eventsData.push(eventData);
+            });
+
+            // 返回事件数据数组
+            return eventsData;
+        } catch (error) {
+            console.error('無法得到event資料', error);
+            return '無法得到event資料';
+        }
+    }
+
+    async addEventData(userId, eventData) {
+        try {
+            // 先在 "users" 集合中查找用户文档
+            const userRef = db.collection('users').doc(userId);
+            const userDoc = await userRef.get();
+    
+            // 检查用户文档是否存在
+            if (!userDoc.exists) {
+                return 'User not found';
+            }
+    
+            // 然后在 "events" 集合中查找名为 "test" 的事件文档
+            const eventRef = userRef.collection('events').doc();
+            await eventRef.set(eventData);
+            return true; // 返回成功状态
+        } catch (error) {
+            console.error('無法新增event資料', error);
+            return '無法新增event資料';
+        }
+    }
+    
+    async getEventID(userId, title, start, end) {
+        try {
+            const userRef = db.collection('users').doc(userId);
+
+            const querySnapshot = await userRef.collection('events')
+                .where('title', '==', title)
+                .where('start', '==', start)
+                .where('end', '==', end)
+                .get();
+            if (!querySnapshot.empty) {
+                // 如果找到匹配的用户记录，您可以获取第一个匹配的事件的ID
+                const eventID = querySnapshot.docs[0].id;
+                return eventID;
+            } else {
+                console.log('未找到符合的使用者事件');
+                return null; // 或者可以返回其他适当的值，表示未找到匹配记录
+            }
+        } catch (error) {
+            console.error('查詢出錯:', error);
+            return null; // 处理错误情况，也可以返回其他适当的值
+        }
+    }
+
+    async updateEvent(userId, eventId, newEvent) {
+        const dbref = await db.collection('users').doc(userId);
+        const dbevent = await dbref.collection('events').doc(eventId);
+        return dbevent.update(newEvent);
+    }
+
+    async deleteEvent(userId, eventId) {
+        const dbref = db.collection('users').doc(userId);
+        const dbevent = dbref.collection('events').doc(eventId);
+
+        try {
+            await dbevent.delete();
+            console.log('刪除成功');
+            return true;
+        } catch (error) {
+            console.error('刪除失敗', error);
+            return false;
+        }
+    }
     // //輸入:帳號
     // //輸出:該帳號所有測驗紀錄
     // async getTestLogs(account) {

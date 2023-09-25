@@ -4,7 +4,7 @@ const accountInput = document.querySelector('#account');
 const passwordInput = document.querySelector('#password');
 
 const fetchData = async () =>{
-    const { account } = sessionStorage;
+    const account = sessionStorage.getItem('account');
 
     const write = await DB_API.getUserdata(account);
 
