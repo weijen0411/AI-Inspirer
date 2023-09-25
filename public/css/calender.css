@@ -1,40 +1,56 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
-
-#external-events {
-    position: fixed;
-    z-index: 2;
-    margin-left: 10%;
-    margin-top: 5%;
-    width: 150px;
-    padding: 10 20px;
-    border: 1px solid #ccc;
-    background: #eee;
-}
-
-.fc-event {
-  margin-top: 10px; /* 這裡的 10px 可以根據你的需求調整 */
-  margin-bottom: 10px;
-}
-
-.fc-event-main {
-  margin-left: 5px;
-}
-
-.fc-event-main:hover {
-  cursor: pointer; /* 将鼠标光标设置为指针 */
-}
-
-#calendar-container {
+.calendar-container {
+  display: flex;
+  align-items: flex-start;
   position: relative;
   z-index: 1;
-  margin-left: 200px;
+  /* margin-left: 5%; */
+  height: 85%;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column; /* 将按钮垂直排列 */
+  margin-left: 5%;
+  margin-top: 8%;
+  flex-grow: 1;
+  order: -1;
+
+}
+
+.buttons button {
+  padding: 15px 5px; /* 按钮内边距 */
+  background-color: #cfc8c3; /* 背景颜色 */
+  color: #464646; /* 文字颜色 */
+  border: none; /* 去掉按钮边框 */
+  border-radius: 5px; /* 圆角边框 */
+  cursor: pointer; /* 鼠标指针样式为手型 */
+  margin-bottom: 3rem; /* 按钮之间的垂直间距 */
+  margin-left: 30%;
+  margin-right: 20%;
+  border-radius: 48px;
+}
+
+/* 按钮的悬停效果 */
+.buttons button:hover {
+  transform: translateY(-6px);
+  box-shadow: 2px 2px 6px 2px #A9A9A9;
+}
+
+/* 按钮的点击效果 */
+.buttons button:active {
+  transform: translateY(-6px);
+  box-shadow: 2px 2px 6px 2px #A9A9A9;
 }
 
 #calendar {
-    width: 65%;
-    height: 85%;
-    margin: 0 auto; /* 將左右外邊距設為auto，實現水平居中 */
-    margin-top: 1%;
-  }
+  display: flex;
+  width: 65%;
+  height: 85%;
+  margin-top: 1%; /* 上面1%的邊距 */
+  margin-left: auto; /* 左邊自動居中 */
+  margin-right: auto; /* 右邊自動居中 */
+  /* margin-right: 15%; */
+}
 
