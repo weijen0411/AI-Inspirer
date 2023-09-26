@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+:root {
+	--dark-color-a: #464646;
+	--dark-color-b: #cfc8c3;
+	--light-color: #fff;
+	--success-color: #5cb85c;
+	--error-color: #d9534f;
+}
+
+/* * {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+} */
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	background: var(--light-color);
+	margin: 0px;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+.join-main .btn {
+	cursor: pointer;
+	padding: 5px 15px;
+	background: var(--dark-color-a);
+	color: #fff;
+	border: 0;
+	font-size: 17px;
+}
+
+/* Join Page */
+.join-container {
+	max-width: 500px;
+	margin: 80px auto;
+    flex-wrap: wrap;
+    justify-content: center;
+	
+}
+
+.join-header {
+	text-align: center;
+	padding: 20px;
+	background: var(--dark-color-a);
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	color: #fff;
+}
+
+.join-main {
+	padding: 30px 40px;
+	background: var(--dark-color-b);
+}
+
+.join-main p {
+	margin-bottom: 20px;
+}
+
+.join-main .form-control {
+	margin-bottom: 20px;
+}
+
+.join-main label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.join-main input[type='text'] {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+}
+.join-main input[type='account'] {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+	margin: 10px 0;
+}
+.join-main input[type='password'] {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+	margin: 10px 0;
+}
+
+
+.join-main select {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+}
+
+.join-main .btn {
+	margin-top: 20px;
+	width: 100%;
+}
+
+@media (max-width: 700px) {
+	.chat-main {
+		display: block;
+	}
+
+	.chat-sidebar {
+		display: none;
+	}
+}
+
+.tab_content {
+    position: relative;
+    order: 1;
+    display: flex;
+    width: 100%;
+    height: 90%;
+    line-height: 1.6;
+    /* font-size: .9em; */
+    /* padding: 15px; */
+    /* border: 1px solid #abafa8; */
+    /* border-radius: 5px; */
+    /* margin: auto; */
+    background-color: #C5B9AA;
+    /* flex: 0 1 100%; */
+}
+
