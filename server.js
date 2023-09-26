@@ -42,14 +42,14 @@ io.on("connection", (socket) => {
     socket.join(user.room);
 
     // Welcome current user
-    socket.emit("message", formatMessage(botName, "歡迎來到討論室!"));
+    socket.emit("message", formatMessage(`${botName} `, "歡迎來到討論室!"));
 
     // Broadcast when a user connects
     socket.broadcast
       .to(user.room)
       .emit(
         "message",
-        formatMessage(botName, `${user.username} 加入了討論室`)
+        formatMessage(`${botName} `, `${user.username} 加入了討論室`)
       );
 
     // Send users and room info
@@ -67,7 +67,7 @@ io.on("connection", (socket) => {
   socket.on("chatMessage", (msg) => {
     const user = getCurrentUser(socket.id);
 
-    io.to(user.room).emit("message", formatMessage(user.username, msg));
+    io.to(user.room).emit("message", formatMessage(`${user.username} `, msg));
   });
 
   // Runs when client disconnects
@@ -77,7 +77,7 @@ io.on("connection", (socket) => {
     if (user) {
       io.to(user.room).emit(
         "message",
-        formatMessage(botName, `${user.username} 離開了討論室`)
+        formatMessage(`${botName} `, `${user.username} 離開了討論室`)
       );
 
       // Send users and room info
