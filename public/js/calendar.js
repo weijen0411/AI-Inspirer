@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             alert('您取消了輸入。');
           } else if (eventTitle == "") {
             alert('沒有輸入名稱');
+          } else if (sessionStorage.getItem('start') == "" || sessionStorage.getItem('end') == "") {
+            alert('沒有選擇日期');
           } else {
             const eventData = {
               title: eventTitle,
