@@ -41,7 +41,7 @@ a {
 	color: #fff;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-	padding: 15px;
+	padding: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -127,4 +127,17 @@ a {
 	padding: 5px;
 	height: 40px;
 	flex: 1;
+}
+
+/* 按钮样式 */
+.bot-button {
+    background-color: var(--dark-color-a); /* 设置背景颜色 */
+    border-radius: 50%; /* 设置圆角半径为50%以实现圆形 */
+	margin-right: 20px;
+}
+
+/* 鼠标悬停时的样式 */
+.bot-button:hover {
+	background-color: #585858; /* 鼠标悬停时的背景颜色 */
+	cursor: pointer;
 }
