@@ -6,6 +6,6 @@ cmd
 
 cmd
 
-1. D:\final_project\chatroom (進到自己的chatroom資料夾)
+1. cd D:\final_project\chatroom (進到自己的chatroom資料夾)
 
 2. node server.js

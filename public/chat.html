@@ -9,13 +9,33 @@
       integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/chat.css" />
+    <link rel="stylesheet" type="text/css" href="css/section.css">
     <title>ChatCord App</title>
   </head>
   <body>
+    <section>
+			<div class="nav">
+				<a href="select.html" class="logo">
+					<i class="fa fa-book fa-3x" aria-hidden="true"></i>&nbsp;&nbsp;
+					<span>NAME</span>
+				</a>
+				<div class="navbar">
+					<ul>
+						<li><a href="record.html">個人主頁</a></li>
+						<li class="active"><a href="join.html">討論室</a></li>
+						<li><a href="#">題目測驗</a></li>
+						<li><a href="http://localhost:8501/">問答</a></li>
+						<li><a href="calendar.html">行事曆</a></li>
+						<a href="index.html" class="btn">登出</a>
+					</ul>
+				</div>
+				
+			</div>
+		</section>
     <div class="chat-container">
       <header class="chat-header">
-        <h1><i class="fas fa-smile"></i> 討論室</h1>
+        <h1><i class="fa fa-smile fa-lg"></i>&nbsp;&nbsp;討論室</h1>
         <a id="leave-btn" class="btn">離開房間</a>
       </header>
       <main class="chat-main">
@@ -29,6 +49,9 @@
       </main>
       <div class="chat-form-container">
         <form id="chat-form">
+          <button class="bot-button" id="left-button">
+            <img src="./img/eve.png" height ="40px" width="40px" />
+          </button>
           <input
             id="msg"
             type="text"
@@ -36,11 +59,10 @@
             required
             autocomplete="off"
           />
-          <button class="btn"><i class="fas fa-paper-plane"></i> 傳送</button>
         </form>
       </div>
     </div>
-
+    
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
       integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
