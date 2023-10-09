@@ -1,3 +1,0 @@
-1. cd 自己的langchain-chatchat路徑
-
-2. 執行 python startup.py --all-api
