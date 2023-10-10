@@ -21,6 +21,11 @@ class API {
         return getUsers.docs.map(user => user.data());
     }
 
+    async getTeachers() {
+        const getTeachers = await db.collection('teachers').get();
+        return getTeachers.docs.map(teacher => teacher.data());
+    }
+
     //輸入:帳號,密碼
     //輸出:是否有該使用者
     async getUser(account, password) {
@@ -28,6 +33,15 @@ class API {
         if (getUser.empty) return 'user not found';
         const userData = getUser.docs[0].data();
         if (userData.password !== password) return 'wrong password';
+
+        return 'logged in';
+    }
+
+    async getTeacher(account, password) {
+        const getTeacher = await db.collection('teachers').where('account', '==', account).get();
+        if (getTeacher.empty) return 'teacher not found';
+        const teacherData = getTeacher.docs[0].data();
+        if (teacherData.password !== password) return 'wrong password';
 
         return 'logged in';
     }

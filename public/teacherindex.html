@@ -11,17 +11,20 @@
 
 <body>
     <div class="container" align="center">
-        <br><br><a class="logintext">請選擇身分</a><br><br><br>
-        <button class="identity" id="teacher" onclick="window.location.href='./teacherindex.html'"><p>老師</p></button><br>
-        <button class="identity" id="student" onclick="window.location.href='./studentindex.html'"><p>學生</p></button>
-       
+        <br><br><a class="logintext">老師系統</a>
+        <input class="login" id="account" type="text" placeholder="帳號">
+        <input class="login" id="password" type="password" placeholder="密碼">
+
+        <button class="loginbtn" id="login">
+            <p>登入</p>
+        </button>
     </div>
 </body>
 
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
 <script src="./database/db.js"></script>
-<script src="./js/index.js"></script>
+<script src="./js/teacherindex.js"></script>
 <!-- <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script> -->
 
 </html>
