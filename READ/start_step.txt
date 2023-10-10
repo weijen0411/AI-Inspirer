@@ -1,11 +1,18 @@
-cmd 
+
+redis 啟動 (cmd)
 
 1. cd D:\Redis-x64-5.0.14.1 (進到自己的Redis資料夾)
 
 2. redis-server.exe redis.windows.conf
 
-cmd
+project 啟動 (cmd)
 
 1. cd D:\final_project\chatroom (進到自己的chatroom資料夾)
 
 2. node server.js
+
+llm 啟動 (anaconda)
+
+1. cd 自己的langchain-chatchat路徑
+
+2. 執行 python startup.py --all-api
