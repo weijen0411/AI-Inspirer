@@ -1,0 +1,10 @@
+
+
+iframe {
+    display: flex;
+    margin-top: 1%; /* 上面1%的邊距 */
+    margin-left: auto; /* 左邊自動居中 */
+    margin-right: auto; /* 右邊自動居中 */
+    /* margin-right: 15%; */
+  }
+  
