@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
+</head>
+
+<body >
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top"style="background-color: #cfc8c3;">
+        <div class="container-fluid ms-5">
+            <a class="navbar-brand fs-1 fw-bold" href="student_select.html">
+                <img src="img\eve.png" alt="" width="45" height="40" class="d-inline-block align-text-top">
+                AI Creative
+            </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse  position-relative justify-content-end me-5" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item pe-3">
+                <a class="nav-link fs-4" href="student_research.html">主題探討</a>
+              </li>
+              <li class="nav-item pe-3">
+                <a class="nav-link fs-4 " href="student_join.html">討論室</a>
+              </li>
+              <li class="nav-item pe-3">
+                <a class="nav-link fs-4" href="http://localhost:8501/">問答</a>
+              </li>
+              <li class="nav-item pe-3">
+                <a class="nav-link fs-4" href="student_calendar.html">行事曆</a>
+              </li>
+              <li class="nav-item dropdown pt-2">
+                <div class="dropdown me-1">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">
+                    個人資料
+                    </button>
+                    <ul class="dropdown-menu p-3 text-muted" style="max-width: 300px;" aria-labelledby="dropdownMenuButton1">
+                    <li><span class="dropdown-item-text">姓名：<label class= "info fs-5" id="name" type="text"></label></span></li>
+                    <li><span class="dropdown-item-text">帳號：<label class= "info fs-5" id="account" type="text"></label></span></li>
+                    <li><span class="dropdown-item-text">密碼：<label class= "info fs-5" id="password" type="text"></label></span></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item fs-4" href="index.html">登出</a></li>
+                    </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+    <script src="./database/db.js"></script>
+    <script src="./js/student_record.js"></script>
+    
+</body>
+
+</html>

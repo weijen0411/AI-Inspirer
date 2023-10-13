@@ -54,3 +54,7 @@
   /* margin-right: 15%; */
 }
 
+.fc .fc-scroller-harness a{
+  color:#212529;
+  text-decoration:none;
+}

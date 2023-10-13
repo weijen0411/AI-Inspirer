@@ -22,6 +22,6 @@ loginBtn.onclick = async () => {
         const userId = await DB_API.getTeacherID(account, password);
         sessionStorage.setItem('account',account);
         sessionStorage.setItem('userId', userId);
-        location.assign('./select.html');
+        location.assign('./teacher_select.html');
     }
 }

@@ -5,15 +5,14 @@ const passwordInput = document.querySelector('#password');
 
 const fetchData = async () =>{
     const account = sessionStorage.getItem('account');
-
-    const write = await DB_API.getUserdata(account);
+    const write = await DB_API.getTeacherdata(account);
 
     nametInput.textContent = write.name;
     accountInput.textContent = write.account;
-    passwordInput.textContent = write.password;
-            
+    passwordInput.textContent = write.password;       
 }
 fetchData();
+
 
 // updatebtn.onclick = async () => {
 //     const { account } = sessionStorage;

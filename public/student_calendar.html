@@ -2,6 +2,7 @@
 <html lang='en'>
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./css/calender.css" />
     <link rel="stylesheet" type="text/css" href="./css/navbar.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
@@ -13,7 +14,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-light "style="background-color: #cfc8c3;">
       <div class="container-fluid ms-5">
-          <a class="navbar-brand fs-1 fw-bold" href="select.html">
+          <a class="navbar-brand fs-1 fw-bold" href="student_select.html">
               <img src="img\eve.png" alt="" width="45" height="40" class="d-inline-block align-text-top">
               AI Creative
           </a>
@@ -23,16 +24,16 @@
         <div class="collapse navbar-collapse  position-relative justify-content-end me-5" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item pe-3">
-              <a class="nav-link fs-4" href="research.html">主題探討</a>
+              <a class="nav-link fs-4" href="student_research.html">主題探討</a>
             </li>
             <li class="nav-item pe-3">
-              <a class="nav-link active fs-4 " aria-current="page" href="join.html">討論室</a>
+              <a class="nav-link fs-4 " aria-current="page" href="student_join.html">討論室</a>
             </li>
             <li class="nav-item pe-3">
               <a class="nav-link fs-4" href="http://localhost:8501/">問答</a>
             </li>
             <li class="nav-item pe-3">
-              <a class="nav-link fs-4" href="calendar.html">行事曆</a>
+              <a class="nav-link active fs-4" href="student_calendar.html">行事曆</a>
             </li>
             <li class="nav-item dropdown pt-2">
               <div class="dropdown me-1">
@@ -59,6 +60,6 @@
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
 <script src="./database/db.js"></script>
 <script src="./js/calendar.js"></script>
-<script src="./js/record.js"></script>
+<script src="./js/student_record.js"></script>
 <!-- <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script> -->
 <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
