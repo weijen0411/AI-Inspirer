@@ -19,7 +19,9 @@ loginBtn.onclick = async () => {
     if(teacherLogin === 'teacher not found') alert('未找到該帳號');
     else if (teacherLogin === 'wrong password') alert('密碼錯誤');
     else if(teacherLogin === 'logged in') {
+        const userId = await DB_API.getTeacherID(account, password);
         sessionStorage.setItem('account',account);
-                location.assign('./select.html');
+        sessionStorage.setItem('userId', userId);
+        location.assign('./select.html');
     }
 }
