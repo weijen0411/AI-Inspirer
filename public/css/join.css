@@ -45,6 +45,7 @@ a {
     flex-wrap: wrap;
     justify-content: center;
 	
+	
 }
 
 .join-header {
@@ -65,8 +66,9 @@ a {
 	margin-bottom: 20px;
 }
 
-.join-main .form-control {
+.join-main .form-control1 {
 	margin-bottom: 20px;
+	background: var(--dark-color-b);
 }
 
 .join-main label {
