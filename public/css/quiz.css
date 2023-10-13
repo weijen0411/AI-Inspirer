@@ -1,10 +1,14 @@
 
+#quiz {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 iframe {
-    display: flex;
-    margin-top: 1%; /* 上面1%的邊距 */
-    margin-left: auto; /* 左邊自動居中 */
-    margin-right: auto; /* 右邊自動居中 */
-    /* margin-right: 15%; */
-  }
+    max-width: 100%; /* 确保iframe宽度不超过其容器 */
+    width: 40rem;
+    height: 54.375rem;
+}
   
