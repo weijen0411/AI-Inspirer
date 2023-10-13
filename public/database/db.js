@@ -66,6 +66,26 @@ class API {
         }
     }
 
+    async getTeacherID(account, password) {
+        try {
+            const querySnapshot = await db.collection('teachers')
+                .where('account', '==', account)
+                .where('password', '==', password)
+                .get();
+            if (!querySnapshot.empty) {
+                // 如果找到匹配的用户记录，您可以获取第一个匹配的事件的ID
+                const userID = querySnapshot.docs[0].id;
+                return userID;
+            } else {
+                console.log('未找到符合的使用者紀錄');
+                return null; // 或者可以返回其他适当的值，表示未找到匹配记录
+            }
+        } catch (error) {
+            console.error('查詢出错:', error);
+            return null; // 处理错误情况，也可以返回其他适当的值
+        }
+    }
+
     async addUsers(postData) {
         try {
             const dbref = await db.collection('users').doc();
@@ -87,8 +107,18 @@ class API {
     //輸出:該帳號資料
     async getUserdata(account) {
         const getUser = await db.collection('users').where('account', '==', account).get();
-        if (!getUser) return 'user not found';
-        return getUser.docs[0].data();
+        if (getUser.empty) return 'user not found';
+        const userData = getUser.docs[0].data();
+        
+        return userData;
+    }
+
+    async getTeacherdata(account) {
+        const getTeacher = await db.collection('teachers').where('account', '==', account).get();
+        if (getTeacher.empty) return 'user not found';
+        const teacherData = getTeacher.docs[0].data(); // 獲取第一個文件的數據
+
+        return teacherData; // 返回教師文件的所有欄位數據
     }
 
     async getEventData(userId) {
@@ -185,6 +215,47 @@ class API {
             return false;
         }
     }
+
+    // courses 主題
+    async getCourses() {
+        // 引用 "courses" 集合
+        const coursesCollection = await db.collection("courses");
+      
+        try {
+          const courseData = [];
+      
+          // 获取 "courses" 集合中的所有文档
+          const querySnapshot = await coursesCollection.get();
+      
+          querySnapshot.forEach((doc) => {
+            // 获取每个文档的 "subject" 和 "topic" 字段
+            const data = doc.data();
+            const subject = data.subject;
+            const topic = data.topic;
+            const teacher = data.name
+      
+            // 将数据存入数组
+            courseData.push({ subject, teacher, topic });
+          });
+      
+          // 返回储存了所有文档数据的数组
+          return courseData;
+        } catch (error) {
+          console.error("获取文档时出错：", error);
+          throw error; // 可以选择抛出错误以便在调用方处理
+        }
+    }
+
+    async addCourses(coursesData) {
+        try {
+            const dbref = await db.collection('courses').doc();
+            await dbref.set(coursesData);
+            return true; // 返回成功状态
+        } catch (error) {
+            throw error; // 抛出错误，以便在调用方进行错误处理
+        }
+    }
+
     // //輸入:帳號
     // //輸出:該帳號所有測驗紀錄
     // async getTestLogs(account) {

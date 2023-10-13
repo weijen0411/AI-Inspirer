@@ -21,7 +21,7 @@ const userLogin = await DB_API.getUser(account,password);
 // const usersignup = await 
 if(userLogin === 'user not found') {
     try {
-        const writePromise = await DB_API.addUsers(postData);
+        await DB_API.addUsers(postData);
         // 使用 confirm 对话框替代 alert
         alert('註冊成功!');    
         location.assign('./index.html'); // 寫入成功後進行導航
