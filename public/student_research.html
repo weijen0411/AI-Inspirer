@@ -53,49 +53,20 @@
         </div>
     </nav>
     <div class="course-container">
-      <div class="add-course-box" id="addCourse" onclick="addCourse('course1')">
-          <i class="fas fa-plus-circle fa-6x"></i>
-      </div>
-      <div class="modal" id="myModal">
+      <div id="myModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <!-- <span class="close" id="closeModal">&times;</span> -->
-                <h2>建立探討主題</h2>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label for="courseName">科目</label>
-                <select name="subject" id="chooseSubject">
-                  <option value="NO.1">國文</option>
-                  <option value="NO.2">英文</option>
-                  <option value="NO.3">數學</option>
-                  <option value="NO.4">歷史</option>
-                  <option value="NO.5">地理</option>
-                  <option value="NO.6">公民</option>
-                  <option value="NO.7">物理</option>
-                  <option value="NO.8">化學</option>
-                </select>
-              </div>
-            
-              <div class="form-group">
-                <label for="topic">討論主題</label>
-                <textarea id="topic" placeholder="請輸入討論主題"></textarea>
-              </div>
-            </div>
-            <div class="modal-footer">
-                <button id="cancelBtn">取消</button>
-                <button id="createBtn">建立</button>
-            </div>
+            <span class="close">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalContent"></p>
         </div>
       </div>
-    
       <!-- 添加更多课程方块 -->
-  </div>
+    </div>
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
     <script src="./database/db.js"></script>
-    <script src="./js/research.js"></script>
+    <script src="./js/student_research.js"></script>
     <script src="./js/student_record.js"></script>
     
 </body>

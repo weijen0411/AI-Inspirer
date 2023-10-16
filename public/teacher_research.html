@@ -59,8 +59,8 @@
       <div class="modal" id="myModal">
         <div class="modal-content">
             <div class="modal-header">
-                <!-- <span class="close" id="closeModal">&times;</span> -->
-                <h2>建立探討主題</h2>
+            <!-- <span class="close" id="closeModal">&times;</span> -->
+            <h2>建立探討主題</h2>
             </div>
             <div class="modal-body">
               <div class="form-group">
@@ -79,12 +79,19 @@
             
               <div class="form-group">
                 <label for="topic">討論主題</label>
-                <textarea id="topic" placeholder="請輸入討論主題"></textarea>
+                <textarea id="topic" placeholder="請輸入討論主題" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="topic">新增問答</label>
+                <button id="addQuestionButton">+</button>
+              </div>
+              <div id="questionContainer">
+  
               </div>
             </div>
             <div class="modal-footer">
                 <button id="cancelBtn">取消</button>
-                <button id="createBtn">建立</button>
+                <button id="createBtn" type="submit">建立</button>
             </div>
         </div>
       </div>
@@ -95,7 +102,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
     <script src="./database/db.js"></script>
-    <script src="./js/research.js"></script>
+    <script src="./js/teacher_research.js"></script>
     <script src="./js/teacher_record.js"></script>
     
 </body>

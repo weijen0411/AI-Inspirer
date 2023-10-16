@@ -6,6 +6,7 @@
     padding-top: 10rem;
     padding-bottom: 4.5rem;
     padding-left: 6rem;
+
     /* padding-right: 3rem; */
 }
 
@@ -31,6 +32,7 @@
     border: solid #ccc;
     border-radius: 10%;
     padding: 1rem;
+    padding-top: 2.5rem;
     margin-right: 3.5rem;
     margin-bottom: 3.5rem;
     text-align: center;
@@ -67,6 +69,8 @@
     border: 10px solid #888;
     max-width: 40%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-height: 80vh; /* 设置最大高度为视窗高度的80% */
+    overflow-y: auto; /* 启用垂直滚动 */
 }
 
 .form-group {
@@ -106,3 +110,35 @@ width: 100%; /* 使下拉框和文本区域宽度充满父元素 */
     background-color: #e0e0e0;
 }
 
+/* 样式 + 按钮 */
+#addQuestionButton {
+    background-color: #e0e0e0; /* 设置背景颜色 */
+    color: black; /* 设置文字颜色 */
+    font-size: 14px; /* 设置字体大小 */
+    border-radius: 80%; /* 使按钮成为圆形 */
+    width: 25px; /* 设置宽度 */
+    height: 25px; /* 设置高度 */
+    cursor: pointer; /* 鼠标指针样式为手型 */
+  }
+  
+/* 样式 - 按钮 */
+.deleteButton {
+    background-color: #e0e0e0; /* 设置背景颜色 */
+    color: black; /* 设置文字颜色 */
+    font-size: 14px; /* 设置字体大小 */
+    border-radius: 50%; /* 使按钮成为圆形 */
+    width: 25px; /* 设置宽度 */
+    height: 25px; /* 设置高度 */
+    margin-left: 5px;
+    margin-bottom: 5px;
+    cursor: pointer; /* 鼠标指针样式为手型 */
+}
+
+
+
+/*  courses 圖片*/
+.course-history-img {
+    width: 8rem; /* 设置宽度为50像素 */
+    height: 8rem; /* 设置高度为自动，以保持纵横比 */
+    margin-bottom: 1.5rem;
+}
