@@ -1,17 +1,52 @@
-// const updatebtn = document.querySelector('#updatebtn');
-const nametInput = document.querySelector('#name');
-const accountInput = document.querySelector('#account');
-const passwordInput = document.querySelector('#password');
+// 获取要插入元素的父元素
+var ulElement = document.querySelector(".dropdown-menu");
 
 const fetchData = async () =>{
     const account = sessionStorage.getItem('account');
     const write = await DB_API.getUserdata(account);
 
-    nametInput.textContent = write.name;
-    accountInput.textContent = write.account;
-    passwordInput.textContent = write.password;       
-}
-fetchData();
+    
+    var userInfo = {
+        name: write.name,
+        account: write.account,
+        password: write.password
+    };
+    return userInfo;
+};
+
+document.addEventListener('DOMContentLoaded', async function() {
+
+    // 从 fetchData 函数获取用户信息
+    const userInfo = await fetchData();
+
+    // 创建并插入姓名元素
+    var nameLi = document.createElement("li");
+    nameLi.innerHTML = `<span class="dropdown-item-text">姓名：<label class="info fs-5" id="name" type="text">${userInfo.name}</label></span>`;
+    ulElement.appendChild(nameLi);
+
+    // 创建并插入帐号元素
+    var accountLi = document.createElement("li");
+    accountLi.innerHTML = `<span class="dropdown-item-text">帳號：<label class="info fs-5" id="account" type="text">${userInfo.account}</label></span>`;
+    ulElement.appendChild(accountLi);
+
+    // 创建并插入密码元素
+    var passwordLi = document.createElement("li");
+    passwordLi.innerHTML = `<span class="dropdown-item-text">密碼：<label class="info fs-5" id="password" type="text">${userInfo.password}</label></span>`;
+    ulElement.appendChild(passwordLi);
+
+    // 创建分隔线元素
+    var dividerLi = document.createElement("li");
+    dividerLi.innerHTML = `<hr class="dropdown-divider">`;
+    ulElement.appendChild(dividerLi);
+
+    // 创建并插入登出选项
+    var logoutLi = document.createElement("li");
+    logoutLi.innerHTML = `<a class="dropdown-item fs-4" href="index.html">登出</a>`;
+    ulElement.appendChild(logoutLi);
+
+});
+
+
 
 
 // updatebtn.onclick = async () => {
