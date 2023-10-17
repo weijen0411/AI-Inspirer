@@ -1,6 +1,7 @@
   
 .course-container {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
     padding-top: 10rem;
@@ -47,7 +48,8 @@
 
 /* 模态对话框 */
 .modal {
-    display: none;
+    flex-direction: row;
+    display: flex;
     z-index: 1;
     left: 0;
     top: 0;
@@ -71,6 +73,14 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-height: 80vh; /* 设置最大高度为视窗高度的80% */
     overflow-y: auto; /* 启用垂直滚动 */
+}
+
+#coursecontent{
+    justify-content: space-around;
+}
+
+#membercontent{
+    justify-content: space-around;
 }
 
 .form-group {

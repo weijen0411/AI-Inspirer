@@ -26,6 +26,7 @@ class API {
         return getTeachers.docs.map(teacher => teacher.data());
     }
 
+
     //輸入:帳號,密碼
     //輸出:是否有該使用者
     async getUser(account, password) {
@@ -232,10 +233,11 @@ class API {
             const data = doc.data();
             const subject = data.subject;
             const topic = data.topic;
+            const question1 = data.question1;
             const teacher = data.name
       
             // 将数据存入数组
-            courseData.push({ subject, teacher, topic });
+            courseData.push({ subject, teacher, topic, question1 });
           });
       
           // 返回储存了所有文档数据的数组
@@ -255,6 +257,25 @@ class API {
             throw error; // 抛出错误，以便在调用方进行错误处理
         }
     }
+
+    async getQuestion(topic) {
+        try {
+            const querySnapshot = await db.collection('courses')
+                .where("topic", "==", topic).get();
+            if (!querySnapshot.empty) {
+                // 如果找到匹配的用户记录，您可以获取第一个匹配的事件的ID
+                const Question = querySnapshot.docs[0].data();
+                return Question;
+            } else {
+                console.log('未找到符合的問題紀錄');
+                return null; // 或者可以返回其他适当的值，表示未找到匹配记录
+            }
+        } catch (error) {
+            console.error('查詢出错:', error);
+            return null; // 处理错误情况，也可以返回其他适当的值
+        }
+    }
+
 
     // //輸入:帳號
     // //輸出:該帳號所有測驗紀錄

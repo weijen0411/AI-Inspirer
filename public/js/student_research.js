@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     courses.forEach(course => {
         const topic = course.topic;
         const subject = course.subject;
+        const question1 = course.question1;
         
         // 创建一个新的course-box元素
         var newCourseBox = document.createElement("div");
@@ -26,12 +27,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         
         var p = document.createElement("p");
         p.textContent = topic;
-        
+
+        // var lable = document.createElement("lable");
+        // lable.textContent = question1;
         // 将h2和p元素添加到新的course-box中
         newCourseBox.appendChild(img);
         newCourseBox.appendChild(h2);
         newCourseBox.appendChild(p);
-        
+        // newCourseBox.appendChild(lable);
         // 获取course-container元素，并将新的course-box添加到其中
         var courseContainer = document.querySelector(".course-container");
         courseContainer.appendChild(newCourseBox);
@@ -40,24 +43,25 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // 添加点击事件监听器到每个 course-box 元素
     document.querySelectorAll(".course-box").forEach(function(courseBox) {
-        courseBox.addEventListener("click", function() {
+        courseBox.addEventListener("click", async function() {
             // 获取相应的数据，例如根据 courseBox 内的 subject 获取数据
             const subject = courseBox.querySelector("h2").textContent; // 从 h2 元素中获取 subject
             const topic = courseBox.querySelector("p").textContent; // 从 h2 元素中获取 subject
-            
+            const question1 =  await DB_API.getQuestion(topic);
             // 在这里，你可以根据 subject 从数据库或其他数据源中获取相关内容
             // 假设获取到了 title 和 content 数据
             const title = "标题示例：" + subject;
             const content = "内容示例：" + topic;
-            
+            const text = "問題一：" + question1.question1;
+                
             // 填充模态对话框的内容
             document.getElementById("modalTitle").textContent = title;
             document.getElementById("modalContent").textContent = content;
-            
+            document.getElementById("modalQuestion1").textContent = text;
             // 打开模态对话框
             const modal = document.getElementById("myModal");
             modal.style.display = "block";
-        });
+            });
     });
 
     // 关闭模态对话框的按钮
