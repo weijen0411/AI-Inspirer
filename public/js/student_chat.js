@@ -113,7 +113,7 @@ function outputUsers(users) {
 document.getElementById('leave-btn').addEventListener('click', () => {
   const leaveRoom = confirm('確定要離開房間?');
   if (leaveRoom) {
-    window.location = '../join.html';
+    window.location = '../student_join.html'; 
   } else {
   }
 });

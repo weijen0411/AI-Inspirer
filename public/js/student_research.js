@@ -1,6 +1,6 @@
 const account = sessionStorage.getItem('account');
 
-var modal = document.getElementById("myModal");
+var modal = document.getElementById("courseModal");
 
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         newCourseBox.appendChild(p);
         
         // 获取course-container元素，并将新的course-box添加到其中
-        var courseContainer = document.querySelector(".course-container");
+        var courseContainer = document.querySelector(".course-content-container");
         courseContainer.appendChild(newCourseBox);
 
     });
@@ -55,14 +55,14 @@ document.addEventListener('DOMContentLoaded', async function() {
             document.getElementById("modalContent").textContent = content;
             
             // 打开模态对话框
-            const modal = document.getElementById("myModal");
+            const modal = document.getElementById("courseModal");
             modal.style.display = "block";
         });
     });
 
     // 关闭模态对话框的按钮
     document.querySelector(".close").addEventListener("click", function() {
-    const modal = document.getElementById("myModal");
+    const modal = document.getElementById("courseModal");
     modal.style.display = "none";
     });
 });

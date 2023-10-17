@@ -256,6 +256,47 @@ class API {
         }
     }
 
+    // get 個人資料中的任務清單id
+    async getUserCoursesID(userID) {
+        try {
+            const dbref = await db.collection('users').doc(userID);
+            const missionQuerySnapshot = await dbref.collection('mission').get();
+    
+            const courseIDs = [];
+            missionQuerySnapshot.forEach((doc) => {
+                const missionData = doc.data();
+                const courseID = missionData.course_id;
+                if (courseID) {
+                    courseIDs.push(courseID);
+                }
+            });
+    
+            return courseIDs;
+        } catch (error) {
+            throw error; // 抛出错误，以便在调用方进行错误处理
+        }
+    }
+
+    // get 任務清單id 的詳細資料
+    async getCourseData(courseID) {
+        try {
+            const courseRef = db.collection("courses").doc(courseID);
+            const courseDoc = await courseRef.get();
+    
+            if (courseDoc.exists) {
+                // 提取课程文档的所有数据
+                const courseData = courseDoc.data();
+                return courseData;
+            } else {
+                console.log("找不到指定的课程文档");
+                return null;
+            }
+        } catch (error) {
+            console.error("获取文档时出错：", error);
+            throw error; // 抛出错误，以便在调用方处理
+        }
+    }
+
     // //輸入:帳號
     // //輸出:該帳號所有測驗紀錄
     // async getTestLogs(account) {

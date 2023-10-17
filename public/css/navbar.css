@@ -56,3 +56,8 @@ a{
     background-color: #464646; 
 }
 
+/* 個人資料 */
+
+.dropdown-menu {
+	width: 380px;
+}
