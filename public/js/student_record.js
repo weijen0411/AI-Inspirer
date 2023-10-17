@@ -2,15 +2,26 @@
 var ulElement = document.querySelector(".dropdown-menu");
 
 const fetchData = async () =>{
-    const account = sessionStorage.getItem('account');
-    const write = await DB_API.getUserdata(account);
+    const userAccount = sessionStorage.getItem('account');
+    const userID = sessionStorage.getItem('userId');
 
+    const write = await DB_API.getUserdata(userAccount);
+    const coursesID = await DB_API.getUserCoursesID(userID);
     
     var userInfo = {
         name: write.name,
         account: write.account,
-        password: write.password
+        password: write.password,
+        mission: []
     };
+
+    // 使用 Promise.all 等待所有课程数据获取完成
+    await Promise.all(coursesID.map(async (courseID) => {
+        // 获取每个课程的数据
+        const courseData = await DB_API.getCourseData(courseID);
+        userInfo.mission.push(courseData);
+    }));
+
     return userInfo;
 };
 
@@ -33,6 +44,24 @@ document.addEventListener('DOMContentLoaded', async function() {
     var passwordLi = document.createElement("li");
     passwordLi.innerHTML = `<span class="dropdown-item-text">密碼：<label class="info fs-5" id="password" type="text">${userInfo.password}</label></span>`;
     ulElement.appendChild(passwordLi);
+
+
+    // 创建并插入任務元素
+    var missionLi = document.createElement("li");
+
+    // 創建一個存放任務數據的 HTML 字符串
+    var missionHTML = `<span class="dropdown-item-text">任務：<ul class="info fs-5" id="mission">`;
+
+    userInfo.mission.forEach((missionData, index) => {
+        // 這裡假設每個任務都是一個對象，您可以根據您的數據結構進行調整
+        missionHTML += `<li>${index + 1} : ${missionData.subject} ${missionData.topic}</li>`;
+
+    });
+
+    missionHTML += `</ul></span>`;
+
+    missionLi.innerHTML = missionHTML;
+    ulElement.appendChild(missionLi);
 
     // 创建分隔线元素
     var dividerLi = document.createElement("li");
