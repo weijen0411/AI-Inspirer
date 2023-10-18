@@ -44,12 +44,8 @@
 						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">
 						個人資料
 						</button>
-						<ul class="dropdown-menu p-3 text-muted" style="max-width: 300px;" aria-labelledby="dropdownMenuButton1">
-						<li><span class="dropdown-item-text">姓名：<label class= "info fs-5" id="name" type="text"></label></span></li>
-						<li><span class="dropdown-item-text">帳號：<label class= "info fs-5" id="account" type="text"></label></span></li>
-						<li><span class="dropdown-item-text">密碼：<label class= "info fs-5" id="password" type="text"></label></span></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item fs-4" href="index.html">登出</a></li>
+						<ul class="dropdown-menu dropdown-menu-end p-3 text-muted" aria-labelledby="dropdownMenuButton1">
+							<!-- 新增個人資料 寫入js -->
 						</ul>
 					</div>
 				  </li>
@@ -76,15 +72,14 @@
 					<div class="form-control1">
 						<label for="room">房間</label>
 						<select name="room" id="room">
-							<option value="NO.1">第一組</option>
-							<option value="NO.2">第二組</option>
-							<option value="NO.3">第三組</option>
-							<option value="NO.4">第四組</option>
-							<option value="NO.5">第五組</option>
-							<option value="NO.6">第六組</option>
+							<option value="" selected disabled>請選擇房間</option>
+							<!-- room選擇 -->
 						</select>
 					</div>
-					<button type="submit" class="btn">開始聊天</button>
+					<div class="room-content" id="roomContent">
+						<!-- 房間內容 -->
+					</div>
+					<button type="submit" class="btn" id="startChatButton" disabled>開始討論</button>
 				</form>
 			</main>				
 		</div>
@@ -92,5 +87,6 @@
 	<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
     <script src="./database/db.js"></script>
+	<script src="./js/student_join.js"></script>
     <script src="./js/student_record.js"></script>
 </html>

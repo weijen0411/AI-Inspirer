@@ -46,6 +46,7 @@
     background-color: #e0e0e0;
 }
 
+
 /* 模态对话框 */
 .modal {
     flex-direction: row;
@@ -75,13 +76,6 @@
     overflow-y: auto; /* 启用垂直滚动 */
 }
 
-#coursecontent{
-    justify-content: space-around;
-}
-
-#membercontent{
-    justify-content: space-around;
-}
 
 .form-group {
     margin-bottom: 20px; /* 添加垂直间距 */
@@ -95,12 +89,14 @@ select, textarea {
 width: 100%; /* 使下拉框和文本区域宽度充满父元素 */
 }
 
+
 /* 关闭按钮 */
 .close {
     float: right;
     font-size: 24px;
     cursor: pointer;
 }
+
 
 /* 输入框样式，以及取消和建立按钮样式 */
 #courseName {
