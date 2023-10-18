@@ -368,33 +368,6 @@ class API {
             console.error('無法得到member資料', error);
             return '無法得到member資料';
         }
-        // try {
-        //     const querySnapshot = await db.collection('courses')
-        //     .where("topic", "==", topic).get();
-    
-        //     // 检查用户文档是否存在
-        //     if (!querySnapshot.exists) {
-        //         return 'Course not found';
-        //     }
-    
-        //     // 然后在 "member" 集合中查找名为 "test" 的事件文档
-        //     const memberRef = userRef.collection('events');
-        //     const eventsSnapshot = await eventRef.get();
-            
-        //     const eventsData = [];
-        //     eventsSnapshot.forEach((doc) => {
-        //         const eventData = doc.data();
-        //         // 将文档的ID添加到事件数据中
-        //         eventData.id = doc.id;
-        //         eventsData.push(eventData);
-        //     });
-
-        //     // 返回事件数据数组
-        //     return eventsData;
-        // } catch (error) {
-        //     console.error('無法得到event資料', error);
-        //     return '無法得到event資料';
-        // }
     }
 
     // //輸入:帳號
