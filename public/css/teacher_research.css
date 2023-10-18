@@ -65,7 +65,7 @@
     display: flex; /* 使用 flex 布局 */
     flex-direction: column; /* 垂直居中 */
     align-items: center; /* 水平居中 */
-    left: 50%;
+    left: 30%;
     top: 50%;
     transform: translate(-50%, -50%);
     padding: 1.5rem;
@@ -87,6 +87,22 @@ display: block; /* 让标签占据整行 */
 
 select, textarea {
 width: 100%; /* 使下拉框和文本区域宽度充满父元素 */
+}
+
+
+#sendBtn{
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 10px; /* 添加圆角 */
+}
+
+#sendBtn:hover{
+    background-color: #e0e0e0;
+}
+
+#memberlist ol{
+    padding-right: 2rem;
 }
 
 
