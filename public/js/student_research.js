@@ -1,7 +1,5 @@
 const account = sessionStorage.getItem('account');
-
 var modal = document.getElementById("courseModal");
-
 
 document.addEventListener('DOMContentLoaded', async function() {
     const courses = await DB_API.getCourses();
@@ -33,15 +31,17 @@ document.addEventListener('DOMContentLoaded', async function() {
         joinButton.textContent = "加入";
         joinButton.className = "joinButton"; // 添加类名
 
-        joinButton.addEventListener("click", async function(courseID) {
+        joinButton.addEventListener("click", async function() {
             const account = sessionStorage.getItem('account');
+            const userID = sessionStorage.getItem('userId');
             const write = await DB_API.getUserdata(account);
             const memberData = {
                 account: write.account,
                 name: write.name
               };
             try{
-                await DB_API.addCoursemember(topic, memberData);   
+                await DB_API.addCoursemember(topic, memberData);  
+                await DB_API.addUsermission(userID, topic);
             } catch(error){
                 console.error('加入失敗', error);
             }
@@ -66,18 +66,29 @@ document.addEventListener('DOMContentLoaded', async function() {
             // 获取相应的数据，例如根据 courseBox 内的 subject 获取数据
             const subject = courseBox.querySelector("h2").textContent; // 从 h2 元素中获取 subject
             const topic = courseBox.querySelector("p").textContent; // 从 h2 元素中获取 subject
+            const answer = document.getElementById("answer");
+            const sendBtn = document.getElementById("sendBtn");
             const course =  await DB_API.getQuestion(topic);
             const coursemember = await DB_API.getCoursemember(topic);
+            const checkmember = await DB_API.checkCoursemember(topic);
+            if(checkmember === 'hide'){
+                answer.style.display = "none"; sendBtn.style.display = "none";
+            } 
+            else if(checkmember === 'show'){
+                answer.style.display = "flex"; sendBtn.style.display = "flex";
+            }
             // 在这里，你可以根据 subject 从数据库或其他数据源中获取相关内容
             // 假设获取到了 title 和 content 数据
             const title = "标题示例：" + subject;
             const content = "内容示例：" + topic;
             const text = "問題一：" + course.question1;
             var ml = document.getElementById("memberlist");
+            ml.innerHTML = `<ol>`
             coursemember.forEach((coursememberData, index) => {
                 // 這裡假設每個任務都是一個對象，您可以根據您的數據結構進行調整
-                ml.innerHTML = `<ol><li>${index + 1} . ${coursememberData.name}</li></ol>`;
+                ml.innerHTML += `<li>${index + 1} . ${coursememberData.name}</li>`;
             });
+            ml.innerHTML += `</ol>`
      
             // 填充模态对话框的内容
             document.getElementById("modalTitle").textContent = title;
@@ -87,13 +98,19 @@ document.addEventListener('DOMContentLoaded', async function() {
             const modal = document.getElementById("courseModal");
             modal.style.display = "flex";
             });
-    });
 
-    // 关闭模态对话框的按钮
-    document.querySelector(".close").addEventListener("click", function() {
-    const modal = document.getElementById("courseModal");
-    modal.style.display = "none";
+            var coursemodal = document.getElementById("courseModal");
+            window.onclick = function(event) {
+                if (event.target == coursemodal) {
+                    coursemodal.style.display = "none";
+                }
+            }
     });
+    // // 关闭模态对话框的按钮
+    // document.querySelector(".close").addEventListener("click", function() {
+    // const modal = document.getElementById("courseModal");
+    // modal.style.display = "none";
+    // });
 });
 
 

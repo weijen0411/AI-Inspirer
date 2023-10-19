@@ -258,6 +258,7 @@ class API {
         }
     }
 
+    // get課程中的資料
     async getQuestion(topic) {
         try {
             const querySnapshot = await db.collection('courses')
@@ -343,6 +344,32 @@ class API {
         }
     }
 
+    async addUsermission(userID, topic) {
+        try {
+            const querySnapshot = await db.collection('courses')
+            .where("topic", "==", topic).get();
+            if (!querySnapshot.empty) {
+                // 如果找到匹配的用户记录，您可以获取第一个匹配的事件的ID
+                const courseid = querySnapshot.docs[0].id;
+                const getUser = await db.collection('users').doc(userID);
+                const missionQuerySnapshot = await getUser.collection('mission').where('course_id', '==', courseid).get();
+                if (missionQuerySnapshot.empty){
+                    await getUser.collection('mission').add({course_id: courseid});
+                    console.log('加入成功!'); 
+                    window.location.reload();
+                    return true; // 返回成功状态
+                } else{
+                    console.log('已加入此任務');
+                    // alert('已加入此任務');
+                    return '已加入';
+                } 
+            }
+        } catch (error) {
+            console.error('無法新增member資料', error);
+            return '無法新增member資料';
+        }
+    }
+
     async getCoursemember(topic) {
         try {
             const querySnapshot = await db.collection('courses')
@@ -353,22 +380,44 @@ class API {
                 const courseRef = db.collection('courses').doc(courseid);
                 const memberRef = courseRef.collection('member');
                 const membeSnapshot = await memberRef.get();
-
-                const membersData = [];
+                const memberDoc = await memberRef.where('account', '==', account).get();
+                if (!memberDoc.exists){
+                    const membersData = [];
                 membeSnapshot.forEach((doc) => {
                     const memberData = doc.data();
                     // 将文档的ID添加到事件数据中
-                    memberData.id = doc.id;
+                    memberData.id = doc.id; 
                     membersData.push(memberData);
-            });
-            // 返回事件数据数组
-            return membersData;
-            }
+                });
+                // 返回事件数据数组
+                return membersData;}
+                }  
         } catch (error) {
             console.error('無法得到member資料', error);
             return '無法得到member資料';
         }
     }
+
+    async checkCoursemember(topic) {
+        try {
+            const querySnapshot = await db.collection('courses')
+            .where("topic", "==", topic).get();
+            if (!querySnapshot.empty) {
+                // 如果找到匹配的用户记录，您可以获取第一个匹配的事件的ID
+                const courseid = querySnapshot.docs[0].id;
+                const courseRef = db.collection('courses').doc(courseid);
+                const memberRef = courseRef.collection('member');
+                const memberDoc = await memberRef.where('account', '==', account).get();
+                if (memberDoc.empty)return 'hide';
+                if (!memberDoc.empty) return 'show';
+                }   
+        } catch (error) {
+            console.error('無法得到member資料', error);
+            return '無法得到member資料';
+        }
+    }
+
+
 
     // //輸入:帳號
     // //輸出:該帳號所有測驗紀錄

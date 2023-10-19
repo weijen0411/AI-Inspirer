@@ -11,7 +11,6 @@ openModalButton.onclick = function() {
     modalcontent.style.left = "50%";
 }
 
-
 // 当用户点击 modal 之外的区域时关闭 modal
 window.onclick = function(event) {
     if (event.target == modal) {
@@ -129,10 +128,12 @@ document.addEventListener('DOMContentLoaded', async function() {
             const content = "内容示例：" + topic;
             const text = "問題一：" + course.question1;
             var ml = document.getElementById("memberlist");
+            ml.innerHTML = `<ol>`
             coursemember.forEach((coursememberData, index) => {
                 // 這裡假設每個任務都是一個對象，您可以根據您的數據結構進行調整
-                ml.innerHTML = `<ol><li>${index + 1} . ${coursememberData.name}</li></ol>`;
+                ml.innerHTML += `<li>${index + 1} . ${coursememberData.name}</li>`;
             });
+            ml.innerHTML += `</ol>`
      
             // 填充模态对话框的内容
             document.getElementById("modalTitle").textContent = title;
@@ -142,13 +143,19 @@ document.addEventListener('DOMContentLoaded', async function() {
             const modal = document.getElementById("courseModal");
             modal.style.display = "flex";
             });
-    });
 
-    // 关闭模态对话框的按钮
-    document.querySelector(".close").addEventListener("click", function() {
-    const modal = document.getElementById("courseModal");
-    modal.style.display = "none";
+            var coursemodal = document.getElementById("courseModal");
+        window.onclick = function(event) {
+            if (event.target == coursemodal) {
+                coursemodal.style.display = "none";
+            }
+        }
     });
+    // 关闭模态对话框的按钮
+    // document.querySelector(".close").addEventListener("click", function() {
+    // const modal = document.getElementById("courseModal");
+    // modal.style.display = "none";
+    // });
 });
 
 

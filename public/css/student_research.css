@@ -15,7 +15,7 @@
     border: solid #ccc;
     border-radius: 10%;
     padding: 1rem;
-    padding-top: 2.5rem;
+    padding-top: 1.5rem;
     margin-right: 3.5rem;
     margin-bottom: 3.5rem;
     text-align: center;
@@ -86,8 +86,9 @@ textarea{
     background-color: #e0e0e0;
 }
 
-#memberlist ol{
+#membercontent ol, li{
     padding-right: 2rem;
+    font-size: 30px;
 }
 
 /* 关闭按钮 */
@@ -99,7 +100,7 @@ textarea{
 
 /*  courses 圖片*/
 .course-history-img {
-    width: 8rem; /* 设置宽度为50像素 */
-    height: 8rem; /* 设置高度为自动，以保持纵横比 */
-    margin-bottom: 1.5rem;
+    width: 6rem; /* 设置宽度为50像素 */
+    height: 6rem; /* 设置高度为自动，以保持纵横比 */
+    margin-bottom: 0.5rem;
 }

@@ -101,10 +101,10 @@ width: 100%; /* 使下拉框和文本区域宽度充满父元素 */
     background-color: #e0e0e0;
 }
 
-#memberlist ol{
+#membercontent ol, li{
     padding-right: 2rem;
+    font-size: 30px;
 }
-
 
 /* 关闭按钮 */
 .close {
@@ -160,7 +160,7 @@ width: 100%; /* 使下拉框和文本区域宽度充满父元素 */
 
 /*  courses 圖片*/
 .course-history-img {
-    width: 8rem; /* 设置宽度为50像素 */
-    height: 8rem; /* 设置高度为自动，以保持纵横比 */
-    margin-bottom: 1.5rem;
+    width: 7rem; /* 设置宽度为50像素 */
+    height: 7rem; /* 设置高度为自动，以保持纵横比 */
+    margin-bottom: 1rem;
 }
