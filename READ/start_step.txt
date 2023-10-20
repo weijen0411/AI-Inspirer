@@ -15,4 +15,6 @@ llm 啟動 (anaconda)
 
 1. cd 自己的langchain-chatchat路徑
 
-2. 執行 python startup.py --all-api
+2. 執行 python startup.py -a 
+
+3. 執行 python startup.py --all-api (api 測試)
