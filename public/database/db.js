@@ -233,11 +233,12 @@ class API {
             const data = doc.data();
             const subject = data.subject;
             const topic = data.topic;
-            const question1 = data.question1;
+            // const question1 = data.question1;
             const teacher = data.name
+            const docId = doc.id;
       
             // 将数据存入数组
-            courseData.push({ subject, teacher, topic, question1 });
+            courseData.push({ subject, teacher, topic, docId });
           });
       
           // 返回储存了所有文档数据的数组
@@ -258,21 +259,45 @@ class API {
         }
     }
 
-    // get課程中的資料
-    async getQuestion(topic) {
+    async updateCourseData(courseID, updateData) {
+        const dbRef = await db.collection('courses').doc(courseID);
+    
         try {
-            const querySnapshot = await db.collection('courses')
-                .where("topic", "==", topic).get();
-            if (!querySnapshot.empty) {
-                // 如果找到匹配的用户记录，您可以获取第一个匹配的事件的ID
-                const Question = querySnapshot.docs[0].data();
-                return Question;
-            } else {
-                console.log('未找到符合的問題紀錄');
-                return null; // 或者可以返回其他适当的值，表示未找到匹配记录
-            }
+            await dbRef.update(updateData);
+    
+            console.log('文档字段已成功更新');
         } catch (error) {
-            console.error('查詢出错:', error);
+            console.error('更新文档字段时出错：', error);
+        }
+    }
+
+    // get課程中的資料
+    async getQuestion(course_id) {
+        try {
+            const courseRef = db.collection('courses').doc(course_id);
+    
+            // 获取指定文档的数据
+            const courseDoc = await courseRef.get();
+    
+            if (!courseDoc.exists) {
+                console.error('课程文档不存在');
+                return null;
+            }
+    
+            const courseData = courseDoc.data();
+            const questions = [];
+    
+            // 遍历文档中的所有字段
+            for (const key in courseData) {
+                if (key.startsWith('question')) {
+                    // 如果字段以 "question" 开头，将其值添加到 questions 数组
+                    questions.push(courseData[key]);
+                }
+            }
+    
+            return questions;
+        } catch (error) {
+            console.error('查询出错:', error);
             return null; // 处理错误情况，也可以返回其他适当的值
         }
     }
@@ -370,43 +395,40 @@ class API {
         }
     }
 
-    async getCoursemember(topic) {
+    async getCourseMember(courseID) {
         try {
-            const querySnapshot = await db.collection('courses')
-            .where("topic", "==", topic).get();
-            if (!querySnapshot.empty) {
-                // 如果找到匹配的用户记录，您可以获取第一个匹配的事件的ID
-                const courseid = querySnapshot.docs[0].id;
-                const courseRef = db.collection('courses').doc(courseid);
-                const memberRef = courseRef.collection('member');
-                const membeSnapshot = await memberRef.get();
-                const memberDoc = await memberRef.where('account', '==', account).get();
-                if (!memberDoc.exists){
-                    const membersData = [];
-                membeSnapshot.forEach((doc) => {
+            const courseRef = await db.collection('courses').doc(courseID)
+            const memberRef = await courseRef.collection('member');
+            const memberSnapshot = await memberRef.get();
+
+            if (memberSnapshot.empty) {
+                // 如果没有匹配的文档，返回空数组或其他适当的值
+                return [];
+            } else {
+                // 如果有匹配的文档，将其转化为数组并返回
+                const membersData = [];
+                memberSnapshot.forEach((doc) => {
                     const memberData = doc.data();
-                    // 将文档的ID添加到事件数据中
-                    memberData.id = doc.id; 
                     membersData.push(memberData);
                 });
-                // 返回事件数据数组
-                return membersData;}
-                }  
+                return membersData;
+            }
         } catch (error) {
             console.error('無法得到member資料', error);
             return '無法得到member資料';
         }
     }
 
-    async checkCoursemember(topic) {
+    async checkCourseMember(courseID, account) {
         try {
-            const querySnapshot = await db.collection('courses')
-            .where("topic", "==", topic).get();
+            const dbRef = await db.collection('courses').doc(courseID);
+
+            const querySnapshot = await db.collection('courses').doc(courseID).get();
+
             if (!querySnapshot.empty) {
                 // 如果找到匹配的用户记录，您可以获取第一个匹配的事件的ID
-                const courseid = querySnapshot.docs[0].id;
-                const courseRef = db.collection('courses').doc(courseid);
-                const memberRef = courseRef.collection('member');
+
+                const memberRef = dbRef.collection('member');
                 const memberDoc = await memberRef.where('account', '==', account).get();
                 if (memberDoc.empty)return 'hide';
                 if (!memberDoc.empty) return 'show';

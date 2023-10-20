@@ -29,7 +29,7 @@
                 <a class="nav-link fs-4 " href="teacher_join.html">討論室</a>
               </li>
               <li class="nav-item pe-3">
-                <a class="nav-link fs-4" href="http://localhost:8501/">問答</a>
+                <a class="nav-link fs-4" href="http://localhost:8501/" target="_blank">問答</a>
               </li>
               <li class="nav-item pe-3">
                 <a class="nav-link fs-4" href="teacher_calendar.html">行事曆</a>
@@ -100,7 +100,13 @@
             <!-- <span class="close">&times;</span> -->
             <h2 id="modalTitle"></h2>
             <p id="modalContent"></p>
-            <lable id="modalQuestion1"></lable>
+            <lable id="modalQuestion"></lable><br>
+
+            <!-- 编辑按钮 -->
+            <button id="courseContentEditButton" class="btn btn-secondary">编辑</button>
+
+            <!-- 保存按钮 -->
+            <button id="courseContentSaveButton" class="btn btn-secondary" style="display: none;">保存</button>
         </div>
         <div class="modal-content" id="membercontent">
             <h2 id="Title">成員：</h2>
