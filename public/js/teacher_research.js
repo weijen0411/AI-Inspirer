@@ -24,7 +24,235 @@ cancelButton.onclick = function() {
     modal.style.display = "none";
 }
 
-// 点击 "建立" 按钮时执行建立课程的操作
+
+document.addEventListener('DOMContentLoaded', async function() {
+    const courses = await DB_API.getCourses();
+    console.log(courses);
+    // 遍歷courses數組，獲取每個物件中的topic和subject
+    courses.forEach(course => {
+        const topic = course.topic;
+        const subject = course.subject;
+        const courseID = course.docId;
+        
+        // 创建一个新的course-box元素
+        var newCourseBox = document.createElement("div");
+        newCourseBox.className = "course-box";
+        newCourseBox.id = courseID;
+        
+        var img = document.createElement("img");
+        if (subject === '歷史') {
+            img.src = '../img/history.png'; // 根据实际图像路径设置
+            img.className = "course-history-img";
+            img.alt = '歷史圖片';
+        } 
+       // 创建course-box内的h2和p元素
+        var h2 = document.createElement("h2");
+        h2.textContent = subject;
+        
+        var p = document.createElement("p");
+        p.textContent = topic;
+        
+        // 将h2和p元素添加到新的course-box中
+        newCourseBox.appendChild(img);
+        newCourseBox.appendChild(h2);
+        newCourseBox.appendChild(p);
+        
+        // 获取course-container元素，并将新的course-box添加到其中
+        var courseContainer = document.querySelector(".course-container");
+        courseContainer.appendChild(newCourseBox);
+    });
+
+    // 添加点击事件监听器到每个 course-box 元素
+    document.querySelectorAll(".course-box").forEach(function(courseBox) {
+
+        const courseEditButton = document.getElementById("courseContentEditButton");
+        const courseSaveButton = document.getElementById("courseContentSaveButton");
+        const titleElement = document.getElementById("modalTitle");
+        const contentElement = document.getElementById("modalContent");
+        const questionsElement = document.getElementById("modalQuestion");
+
+
+        courseBox.addEventListener("click", async function() {
+  
+            const course_id = courseBox.getAttribute("id");
+            const courseData = await DB_API.getCourseData(course_id);
+
+
+            const subject = courseData.subject;
+            const topic = courseData.topic;
+
+            const courseQuestion =  await DB_API.getQuestion(course_id);
+
+            const courseMember = await DB_API.getCourseMember(course_id);
+
+            // 将原始数据显示在模态对话框中，包装在<span>中
+            titleElement.innerHTML = `<span>科目  ${subject}</span>`;
+            contentElement.innerHTML = `<span><br>探討主題<br></span><span><br>${topic}</span>`;
+
+            // 清空原始的问题内容
+            questionsElement.innerHTML = "";
+
+            // 使用forEach循环遍历courseQuestion数组并添加每个问题
+            courseQuestion.forEach((question, index) => {
+                const questionElement = document.createElement("span");
+                questionElement.innerHTML = `<span>問題 ${index + 1}<br></span><span><br>${question}<br><br></span>`;
+                questionsElement.appendChild(questionElement);
+            });
+
+
+            // 点击编辑按钮时
+            courseEditButton.addEventListener("click", function() {
+
+                // 启用编辑模式，只替换需要编辑的部分为输入框
+                titleElement.innerHTML = `<span>科目 </span><input type="text" id="editTitle" value="${subject}" />`;
+                contentElement.innerHTML = `<span><br>探討主題<br></span><br><input type="text" id="editContent" value="${topic}" />`;
+                // 清空原始的问题内容
+                questionsElement.innerHTML = "";
+
+                // 使用forEach循环遍历courseQuestion数组并添加每个问题的编辑输入框
+                courseQuestion.forEach((question, index) => {
+                    const questionElement = document.createElement("div");
+                    questionElement.innerHTML = `<span>問題 ${index + 1}</span><br><input type="text" id="editQuestion${index + 1}" value="${question}" />`;
+                    questionsElement.appendChild(questionElement);
+                });
+
+
+                // 隐藏编辑按钮
+                courseEditButton.style.display = "none";
+
+                // 显示保存按钮
+                courseSaveButton.style.display = "block";
+            });
+
+            // 点击保存按钮时
+            courseSaveButton.addEventListener("click", async function() {
+                // 获取用户编辑后的值
+                const editedSubject = document.getElementById("editTitle").value;
+                const editedTopic = document.getElementById("editContent").value;
+                const editedQuestions = [];
+
+                // 遍历问题输入框，读取每个问题的值
+                courseQuestion.forEach((question, index) => {
+                    const editedQuestion = document.getElementById(`editQuestion${index + 1}`).value;
+                    editedQuestions.push(editedQuestion);
+                });
+
+                const updateData = {
+                    subject: editedSubject,
+                    topic: editedTopic,
+                };
+                
+                // 添加每个问题到更新数据对象
+                editedQuestions.forEach((question, index) => {
+                    updateData[`question${index + 1}`] = question;
+                });
+
+                // 更新模态对话框中的内容
+                titleElement.innerHTML = `<span>科目 ${editedSubject}</span>`;
+                contentElement.innerHTML = `<span><br>探討主題<br></span><span><br>${editedTopic}</span>`;
+                // 更新问题内容
+                questionsElement.innerHTML = "";
+                editedQuestions.forEach((editedQuestion, index) => {
+                    const questionElement = document.createElement("div");
+                    questionElement.innerHTML = `<span>問題 ${index + 1}<br></span><span><br>${editedQuestion}<br><br></span>`;
+                    questionsElement.appendChild(questionElement);
+                });
+
+                await DB_API.updateCourseData(course_id, updateData);
+        
+                // 保存更改到数据库
+                // 编写数据库更新代码，将editedSubject、editedTopic和editedQuestion1保存到数据库中
+
+                // 显示编辑按钮
+                courseEditButton.style.display = "block";
+
+                // 隐藏保存按钮
+                courseSaveButton.style.display = "none";
+
+            });
+
+
+
+            var ml = document.getElementById("memberlist");
+            ml.innerHTML = `<ol>`
+
+            courseMember.forEach((coursememberData, index) => {
+                // 這裡假設每個任務都是一個對象，您可以根據您的數據結構進行調整
+                ml.innerHTML += `<li>${index + 1} . ${coursememberData.name}</li>`;
+            });
+            ml.innerHTML += `</ol>`
+     
+            // 打开模态对话框
+            const modal = document.getElementById("courseModal");
+            modal.style.display = "flex";
+
+            // 显示编辑按钮
+            courseEditButton.style.display = "block";
+
+            // 隐藏保存按钮
+            courseSaveButton.style.display = "none";
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    window.location.reload();
+                    // modal.style.display = "none";
+                }
+            }
+        });
+            
+            
+        // var coursemodal = document.getElementById("courseModal");
+        // window.onclick = function(event) {
+        //     if (event.target == coursemodal) {
+        //         coursemodal.style.display = "none";
+        //     } else {
+        //         window.location.reload();
+        //     }
+        // }
+    });
+    // 关闭模态对话框的按钮
+    // document.querySelector(".close").addEventListener("click", function() {
+    // const modal = document.getElementById("courseModal");
+    // modal.style.display = "none";
+    // });
+});
+
+
+
+document.getElementById("addQuestionButton").addEventListener("click", function() {
+    // 创建一个新的问题和答案字段
+    var questionDiv = document.createElement("div");
+    questionDiv.className = "form-group";
+    
+    var questionLabel = document.createElement("label");
+    questionLabel.textContent = "問答";
+
+    // 创建一个删除按钮
+    var deleteButton = document.createElement("button");
+    deleteButton.textContent = "-";
+    deleteButton.className = "deleteButton"; // 添加类名
+
+    var questionTextarea = document.createElement("textarea");
+    questionTextarea.placeholder = "請輸入問答";
+    
+    document.getElementById("questionContainer").appendChild(questionDiv);
+
+    deleteButton.addEventListener("click", function() {
+        // 当删除按钮被点击时，删除对应的问题和答案字段
+        questionDiv.remove();
+    });
+    
+    // 将问题、答案和删除按钮添加到容器中
+    questionDiv.appendChild(questionLabel);
+    questionDiv.appendChild(deleteButton);
+    questionDiv.appendChild(questionTextarea);
+
+    
+    document.getElementById("questionContainer").appendChild(questionDiv);
+  });
+  
+
+  // 点击 "建立" 按钮时执行建立课程的操作
 document.getElementById("createBtn").addEventListener("click", async function() {
     var questionTextareas = document.querySelectorAll("#questionContainer textarea");
     var topicTextarea = document.getElementById("topic");
@@ -77,117 +305,3 @@ document.getElementById("createBtn").addEventListener("click", async function() 
         alert("请填写所有问题和答案。");
   }
 });
-
-
-
-document.addEventListener('DOMContentLoaded', async function() {
-    const courses = await DB_API.getCourses();
-    // 遍歷courses數組，獲取每個物件中的topic和subject
-    courses.forEach(course => {
-        const topic = course.topic;
-        const subject = course.subject;
-        
-        // 创建一个新的course-box元素
-        var newCourseBox = document.createElement("div");
-        newCourseBox.className = "course-box";
-        
-        var img = document.createElement("img");
-        if (subject === '歷史') {
-            img.src = '../img/history.png'; // 根据实际图像路径设置
-            img.className = "course-history-img";
-            img.alt = '歷史圖片';
-        } 
-       // 创建course-box内的h2和p元素
-        var h2 = document.createElement("h2");
-        h2.textContent = subject;
-        
-        var p = document.createElement("p");
-        p.textContent = topic;
-        
-        // 将h2和p元素添加到新的course-box中
-        newCourseBox.appendChild(img);
-        newCourseBox.appendChild(h2);
-        newCourseBox.appendChild(p);
-        
-        // 获取course-container元素，并将新的course-box添加到其中
-        var courseContainer = document.querySelector(".course-container");
-        courseContainer.appendChild(newCourseBox);
-    });
-
-    // 添加点击事件监听器到每个 course-box 元素
-    document.querySelectorAll(".course-box").forEach(function(courseBox) {
-        courseBox.addEventListener("click", async function() {
-            // 获取相应的数据，例如根据 courseBox 内的 subject 获取数据
-            const subject = courseBox.querySelector("h2").textContent; // 从 h2 元素中获取 subject
-            const topic = courseBox.querySelector("p").textContent; // 从 h2 元素中获取 subject
-            const course =  await DB_API.getQuestion(topic);
-            const coursemember = await DB_API.getCoursemember(topic);
-            // 在这里，你可以根据 subject 从数据库或其他数据源中获取相关内容
-            // 假设获取到了 title 和 content 数据
-            const title = "标题示例：" + subject;
-            const content = "内容示例：" + topic;
-            const text = "問題一：" + course.question1;
-            var ml = document.getElementById("memberlist");
-            ml.innerHTML = `<ol>`
-            coursemember.forEach((coursememberData, index) => {
-                // 這裡假設每個任務都是一個對象，您可以根據您的數據結構進行調整
-                ml.innerHTML += `<li>${index + 1} . ${coursememberData.name}</li>`;
-            });
-            ml.innerHTML += `</ol>`
-     
-            // 填充模态对话框的内容
-            document.getElementById("modalTitle").textContent = title;
-            document.getElementById("modalContent").textContent = content;
-            document.getElementById("modalQuestion1").textContent = text;
-            // 打开模态对话框
-            const modal = document.getElementById("courseModal");
-            modal.style.display = "flex";
-            });
-
-            var coursemodal = document.getElementById("courseModal");
-        window.onclick = function(event) {
-            if (event.target == coursemodal) {
-                coursemodal.style.display = "none";
-            }
-        }
-    });
-    // 关闭模态对话框的按钮
-    // document.querySelector(".close").addEventListener("click", function() {
-    // const modal = document.getElementById("courseModal");
-    // modal.style.display = "none";
-    // });
-});
-
-
-document.getElementById("addQuestionButton").addEventListener("click", function() {
-    // 创建一个新的问题和答案字段
-    var questionDiv = document.createElement("div");
-    questionDiv.className = "form-group";
-    
-    var questionLabel = document.createElement("label");
-    questionLabel.textContent = "問答";
-
-    // 创建一个删除按钮
-    var deleteButton = document.createElement("button");
-    deleteButton.textContent = "-";
-    deleteButton.className = "deleteButton"; // 添加类名
-
-    var questionTextarea = document.createElement("textarea");
-    questionTextarea.placeholder = "請輸入問答";
-    
-    document.getElementById("questionContainer").appendChild(questionDiv);
-
-    deleteButton.addEventListener("click", function() {
-        // 当删除按钮被点击时，删除对应的问题和答案字段
-        questionDiv.remove();
-    });
-    
-    // 将问题、答案和删除按钮添加到容器中
-    questionDiv.appendChild(questionLabel);
-    questionDiv.appendChild(deleteButton);
-    questionDiv.appendChild(questionTextarea);
-
-    
-    document.getElementById("questionContainer").appendChild(questionDiv);
-  });
-  

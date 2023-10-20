@@ -7,11 +7,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     courses.forEach(course => {
         const topic = course.topic;
         const subject = course.subject;
-        const question1 = course.question1;
+        const courseID = course.docId;
         
         // 创建一个新的course-box元素
         var newCourseBox = document.createElement("div");
         newCourseBox.className = "course-box";
+        newCourseBox.id = courseID;
         
         var img = document.createElement("img");
         if (subject === '歷史') {
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             img.className = "course-history-img";
             img.alt = '歷史圖片';
         } 
+
        // 创建course-box内的h2和p元素
         var h2 = document.createElement("h2");
         h2.textContent = subject;
@@ -62,49 +64,92 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // 添加点击事件监听器到每个 course-box 元素
     document.querySelectorAll(".course-box").forEach(function(courseBox) {
+
+        const titleElement = document.getElementById("modalTitle");
+        const contentElement = document.getElementById("modalContent");
+        const questionsElement = document.getElementById("modalQuestion");
+
         courseBox.addEventListener("click", async function() {
+
+            const course_id = courseBox.getAttribute("id");
+            const courseData = await DB_API.getCourseData(course_id);
+
             // 获取相应的数据，例如根据 courseBox 内的 subject 获取数据
-            const subject = courseBox.querySelector("h2").textContent; // 从 h2 元素中获取 subject
-            const topic = courseBox.querySelector("p").textContent; // 从 h2 元素中获取 subject
-            const answer = document.getElementById("answer");
+            const subject = courseData.subject; // 从 h2 元素中获取 subject
+            const topic = courseData.topic; // 从 h2 元素中获取 subject
+
+
             const sendBtn = document.getElementById("sendBtn");
-            const course =  await DB_API.getQuestion(topic);
-            const coursemember = await DB_API.getCoursemember(topic);
-            const checkmember = await DB_API.checkCoursemember(topic);
-            if(checkmember === 'hide'){
-                answer.style.display = "none"; sendBtn.style.display = "none";
-            } 
-            else if(checkmember === 'show'){
-                answer.style.display = "flex"; sendBtn.style.display = "flex";
+            const answers = document.querySelectorAll(".answers");
+      
+
+            const courseQuestion =  await DB_API.getQuestion(course_id);
+
+            const courseMember = await DB_API.getCourseMember(course_id);
+
+            const checkmember = await DB_API.checkCourseMember(course_id, account);
+
+            if (checkmember === 'hide') {
+                answers.forEach(answer => {
+                    answer.style.display = "none";
+                });
+                sendBtn.style.display = "none";
+            } else if (checkmember === 'show') {
+                answers.forEach(answer => {
+                    answer.style.display = "flex";
+                });
+                sendBtn.style.display = "flex";
             }
-            // 在这里，你可以根据 subject 从数据库或其他数据源中获取相关内容
-            // 假设获取到了 title 和 content 数据
-            const title = "标题示例：" + subject;
-            const content = "内容示例：" + topic;
-            const text = "問題一：" + course.question1;
+
+            // 将原始数据显示在模态对话框中，包装在<span>中
+            titleElement.innerHTML = `<span>科目  ${subject}</span>`;
+            contentElement.innerHTML = `<span><br>探討主題<br></span><span><br>${topic}</span>`;
+
+            // 清空原始的问题内容
+            questionsElement.innerHTML = "";
+
+            // 使用forEach循环遍历courseQuestion数组并添加每个问题
+            courseQuestion.forEach((question, index) => {
+                const questionElement = document.createElement("span");
+                questionElement.innerHTML = `<span><br><br>問題 ${index + 1}<br></span><span><br>${question}<br><br></span>`;
+
+                // 创建<textarea>元素
+                const answerTextarea = document.createElement("textarea");
+                answerTextarea.className = "answers";
+                answerTextarea.placeholder = "請輸入答案";
+
+                
+                // 将<textarea>元素添加到问题元素中
+                questionElement.appendChild(answerTextarea);
+
+                // 将问题元素添加到questionsElement中
+                questionsElement.appendChild(questionElement);
+            });
+
             var ml = document.getElementById("memberlist");
             ml.innerHTML = `<ol>`
-            coursemember.forEach((coursememberData, index) => {
+
+            courseMember.forEach((coursememberData, index) => {
                 // 這裡假設每個任務都是一個對象，您可以根據您的數據結構進行調整
                 ml.innerHTML += `<li>${index + 1} . ${coursememberData.name}</li>`;
             });
+
             ml.innerHTML += `</ol>`
      
-            // 填充模态对话框的内容
-            document.getElementById("modalTitle").textContent = title;
-            document.getElementById("modalContent").textContent = content;
-            document.getElementById("modalQuestion1").textContent = text;
+
             // 打开模态对话框
             const modal = document.getElementById("courseModal");
             modal.style.display = "flex";
-            });
 
-            var coursemodal = document.getElementById("courseModal");
-            window.onclick = function(event) {
-                if (event.target == coursemodal) {
-                    coursemodal.style.display = "none";
-                }
+            
+        });
+
+        var coursemodal = document.getElementById("courseModal");
+        window.onclick = function(event) {
+            if (event.target == coursemodal) {
+                coursemodal.style.display = "none";
             }
+        }
     });
     // // 关闭模态对话框的按钮
     // document.querySelector(".close").addEventListener("click", function() {
