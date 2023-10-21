@@ -12,15 +12,15 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top"style="background-color: #cfc8c3;">
-        <div class="container-fluid ms-5">
+        <div class="container-fluid ms-3">
             <a class="navbar-brand fs-1 fw-bold" href="student_select.html">
-                <img src="img\eve.png" alt="" width="45" height="40" class="d-inline-block align-text-top">
+                <img src="img\eve.png" alt="" width="45" height="40" class="d-inline-block align-text-top mt-1">
                     AI Creative
             </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse  position-relative justify-content-end me-5" id="navbarNavDropdown">
+          <div class="collapse navbar-collapse  position-relative justify-content-end me-3" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item pe-3">
                 <a class="nav-link active fs-4" aria-current="page" href="student_research.html">主題探討</a>
@@ -50,7 +50,11 @@
     </nav>
     <div class="course-content-container">
       <div id="courseModal" class="modal">
-        <div class="modal-content" id="coursecontent">
+        <div class="modal-content w-25 border border-5" id="membercontent" >
+          <h2 id="Title">成員：</h2>
+          <ol id="memberlist"></ol>
+      </div>
+        <div class="modal-content border border-5" id="coursecontent">
             <!-- <span class="close">&times;</span> -->
             <h2 id="modalTitle"></h2>
             <p id="modalContent"></p>
@@ -58,10 +62,6 @@
             <!-- <textarea class="answer" id="answer"  placeholder="請輸入回答"></textarea> -->
             <button class="sendBtn" id="sendBtn">送出</button>
         </div>
-        <div class="modal-content" id="membercontent">
-            <h2 id="Title">成員：</h2>
-            <ol id="memberlist"></ol>
-      </div>
     </div>
       <!-- 添加更多课程方块 -->
     </div>

@@ -4,7 +4,7 @@ var modal = document.getElementById("courseModal");
 document.addEventListener('DOMContentLoaded', async function() {
     const courses = await DB_API.getCourses();
     // 遍歷courses數組，獲取每個物件中的topic和subject
-    courses.forEach(course => {
+    courses.forEach (course => {
         const topic = course.topic;
         const subject = course.subject;
         const courseID = course.docId;
@@ -32,22 +32,31 @@ document.addEventListener('DOMContentLoaded', async function() {
         var joinButton = document.createElement("button");
         joinButton.textContent = "加入";
         joinButton.className = "joinButton"; // 添加类名
-
-        joinButton.addEventListener("click", async function() {
-            const account = sessionStorage.getItem('account');
-            const userID = sessionStorage.getItem('userId');
-            const write = await DB_API.getUserdata(account);
-            const memberData = {
-                account: write.account,
-                name: write.name
-              };
-            try{
-                await DB_API.addCoursemember(topic, memberData);  
-                await DB_API.addUsermission(userID, topic);
-            } catch(error){
-                console.error('加入失敗', error);
+        const joined = async () =>{
+            const checkmember = await DB_API.checkCourseMember(courseID, account);
+            if (checkmember === 'show'){
+                joinButton.textContent = "已加入";
             }
-        });
+            else{
+                joinButton.addEventListener("click", async function() {      
+                    const account = sessionStorage.getItem('account');
+                    const userID = sessionStorage.getItem('userId');
+                    const write = await DB_API.getUserdata(account);
+                    const memberData = {
+                        account: write.account,
+                        name: write.name
+                    };
+                    try{
+                        await DB_API.addCoursemember(topic, memberData);  
+                        await DB_API.addUsermission(userID, topic);
+                    } catch(error){
+                        console.error('加入失敗', error);
+                    }
+                    
+            });
+            }
+        }
+        joined();   
         // var lable = document.createElement("lable");
         // lable.textContent = question1;
         // 将h2和p元素添加到新的course-box中
@@ -89,17 +98,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             const checkmember = await DB_API.checkCourseMember(course_id, account);
 
-            if (checkmember === 'hide') {
-                answers.forEach(answer => {
-                    answer.style.display = "none";
-                });
-                sendBtn.style.display = "none";
-            } else if (checkmember === 'show') {
-                answers.forEach(answer => {
-                    answer.style.display = "flex";
-                });
-                sendBtn.style.display = "flex";
-            }
+            // if (checkmember === 'hide') {
+            //     sendBtn.style.display = "none";
+            // } else if (checkmember === 'show') {
+            //     sendBtn.style.display = "flex";
+            // }
 
             // 将原始数据显示在模态对话框中，包装在<span>中
             titleElement.innerHTML = `<span>科目  ${subject}</span>`;
@@ -113,17 +116,22 @@ document.addEventListener('DOMContentLoaded', async function() {
                 const questionElement = document.createElement("span");
                 questionElement.innerHTML = `<span><br><br>問題 ${index + 1}<br></span><span><br>${question}<br><br></span>`;
 
-                // 创建<textarea>元素
+                if(checkmember === 'hide') {
+                    sendBtn.style.display = "none";
+                } else if(checkmember === 'show'){
+                    // 创建<textarea>元素
                 const answerTextarea = document.createElement("textarea");
                 answerTextarea.className = "answers";
                 answerTextarea.placeholder = "請輸入答案";
-
-                
                 // 将<textarea>元素添加到问题元素中
                 questionElement.appendChild(answerTextarea);
-
+                sendBtn.style.display = "flex";
+                }
                 // 将问题元素添加到questionsElement中
                 questionsElement.appendChild(questionElement);
+               
+    
+                
             });
 
             var ml = document.getElementById("memberlist");

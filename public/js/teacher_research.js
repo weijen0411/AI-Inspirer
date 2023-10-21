@@ -201,14 +201,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
             
             
-        // var coursemodal = document.getElementById("courseModal");
-        // window.onclick = function(event) {
-        //     if (event.target == coursemodal) {
-        //         coursemodal.style.display = "none";
-        //     } else {
-        //         window.location.reload();
-        //     }
-        // }
+    
     });
     // 关闭模态对话框的按钮
     // document.querySelector(".close").addEventListener("click", function() {

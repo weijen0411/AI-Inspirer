@@ -65,24 +65,29 @@
     display: flex; /* 使用 flex 布局 */
     flex-direction: column; /* 垂直居中 */
     align-items: center; /* 水平居中 */
+    /* justify-content: start; */
     left: 30%;
     top: 50%;
     transform: translate(-50%, -50%);
     padding: 1.5rem;
+    margin-right: 8rem;
     border: 10px solid #888;
+    border-radius: 1rem;
     max-width: 40%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-height: 80vh; /* 设置最大高度为视窗高度的80% */
     overflow-y: auto; /* 启用垂直滚动 */
 }
 
-
+#modalQuestion{
+    align-items: start; 
+}
 .form-group {
     margin-bottom: 20px; /* 添加垂直间距 */
 }
 
 label {
-display: block; /* 让标签占据整行 */
+display: flex; /* 让标签占据整行 */
 }
 
 select, textarea {
@@ -102,8 +107,8 @@ width: 100%; /* 使下拉框和文本区域宽度充满父元素 */
 }
 
 #membercontent ol, li{
-    padding-right: 2rem;
-    font-size: 30px;
+    padding-right: 2.5rem;
+    font-size: 20px;
 }
 
 /* 关闭按钮 */

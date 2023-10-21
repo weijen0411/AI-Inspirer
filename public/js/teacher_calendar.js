@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             const writePromise = await DB_API.addEventData(userId, eventData);
             
             if (writePromise) {
-              location.assign('./calendar.html'); // 寫入成功後進行導航
+              location.assign('./tescher_calendar.html'); // 寫入成功後進行導航
             }
           }
         }
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             } else {
               const deletePromise = await DB_API.deleteEvent(userId, eventId);
               if (deletePromise) {
-                location.assign('./calendar.html'); // 寫入成功後進行導航
+                location.assign('./tescher_calendar.html'); // 寫入成功後進行導航
               }
             }
           } else {
