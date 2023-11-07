@@ -20,7 +20,41 @@ document.addEventListener('DOMContentLoaded', async function() {
             img.className = "course-history-img";
             img.alt = '歷史圖片';
         } 
-
+        else if (subject === '國文') {
+            img.src = '../img/chinese.png'; // 根据实际图像路径设置
+            img.className = "course-history-img";
+            img.alt = '國文圖片';
+        } 
+        else if (subject === '英文') {
+            img.src = '../img/english.png'; // 根据实际图像路径设置
+            img.className = "course-history-img";
+            img.alt = '英文圖片';
+        } 
+        else if (subject === '數學') {
+            img.src = '../img/math.png'; // 根据实际图像路径设置
+            img.className = "course-history-img";
+            img.alt = '數學圖片';
+        } 
+        else if (subject === '地理') {
+            img.src = '../img/geography.png'; // 根据实际图像路径设置
+            img.className = "course-history-img";
+            img.alt = '地理圖片';
+        } 
+        else if (subject === '公民') {
+            img.src = '../img/Civics.png'; // 根据实际图像路径设置
+            img.className = "course-history-img";
+            img.alt = '公民圖片';
+        } 
+        else if (subject === '化學') {
+            img.src = '../img/Chemical.png'; // 根据实际图像路径设置
+            img.className = "course-history-img";
+            img.alt = '化學圖片';
+        } 
+        else if (subject === '物理') {
+            img.src = '../img/physics.png'; // 根据实际图像路径设置
+            img.className = "course-history-img";
+            img.alt = '物理圖片';
+        } 
        // 创建course-box内的h2和p元素
         var h2 = document.createElement("h2");
         h2.textContent = subject;

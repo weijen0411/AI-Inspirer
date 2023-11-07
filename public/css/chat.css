@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 :root {
 	--dark-color-a: #464646;
-	--dark-color-b: #cfc8c3;
+	--dark-color-b: #d2cbc6;
 	--light-color: #fff;
 	--success-color: #5cb85c;
 	--error-color: #d9534f;
@@ -49,14 +49,15 @@ a {
 
 .chat-header .btn {
 	padding: 9px 25px;
-	border: 1px solid #C5B9AA;
+	border: 1px solid #fff;;
+	color: #fff;
 	border-radius: 5px;
 	cursor: pointer;
 }
 
 .chat-header .btn:hover {
-	border: 1px solid #C5B9AA;
-    background-color: #C5B9AA;
+	border: 1px solid #fff;
+    background-color: #fff;
     transition: .3s;
 }
 
