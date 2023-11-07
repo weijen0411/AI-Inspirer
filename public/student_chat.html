@@ -54,36 +54,47 @@
         </div>
       </div>
     </nav>
-    <div class="chat-container">
-      <header class="chat-header">
-        <h1><i class="fa fa-smile fa-lg"></i>&nbsp;&nbsp;討論室</h1>
-        <a id="leave-btn" class="btn">離開房間</a>
-      </header>
-      <main class="chat-main">
-        <div class="chat-sidebar">
-          <h3><i class="fas fa-comments"></i> 組別：</h3>
-          <h2 id="room-name"></h2>
-          <h3><i class="fas fa-users"></i> 成員</h3>
-          <ul id="users"></ul>
+    <div class="chat-research-container">
+      <div class="research-container">
+        <div class="modal-content border border-5" id="coursecontent">
+          <!-- <span class="close">&times;</span> -->
+          <h2 id="modalTitle"></h2>
+          <p id="modalContent"></p>
+          <lable id="modalQuestion"></lable>
+          <!-- <textarea class="answer" id="answer"  placeholder="請輸入回答"></textarea> -->
+          <!-- <button class="sendBtn" id="sendBtn">送出</button> -->
         </div>
-        <div class="chat-messages"></div>
-      </main>
-      <div class="chat-form-container">
-        <form id="chat-form">
-          <button class="bot-button" id="left-button">
-            <img src="./img/eve.png" height ="40px" width="40px" />
-          </button>
-          <input
-            id="msg"
-            type="text"
-            placeholder="請輸入訊息"
-            required
-            autocomplete="off"
-          />
-        </form>
+      </div>
+      <div class="chat-container">
+        <header class="chat-header">
+          <h1><i class="fa fa-smile fa-lg"></i>&nbsp;&nbsp;討論室</h1>
+          <a id="leave-btn" class="btn">離開房間</a>
+        </header>
+        <main class="chat-main">
+          <div class="chat-sidebar">
+            <h3><i class="fas fa-comments"></i> 組別：</h3>
+            <h2 id="room-name"></h2>
+            <h3><i class="fas fa-users"></i> 成員</h3>
+            <ul id="users"></ul>
+          </div>
+          <div class="chat-messages"></div>
+        </main>
+        <div class="chat-form-container">
+          <form id="chat-form">
+            <button class="bot-button" id="left-button">
+              <img src="./img/eve.png" height ="40px" width="40px" />
+            </button>
+            <input
+              id="msg"
+              type="text"
+              placeholder="請輸入訊息"
+              required
+              autocomplete="off"
+            />
+          </form>
+        </div>
       </div>
     </div>
-    
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
       integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="

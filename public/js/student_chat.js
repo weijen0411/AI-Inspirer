@@ -4,6 +4,7 @@ const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 const inputMsg = document.getElementById('msg');
 
+
 // Get username and room from URL
 const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
@@ -118,3 +119,51 @@ document.getElementById('leave-btn').addEventListener('click', () => {
   }
 });
 
+
+
+// research container
+document.addEventListener('DOMContentLoaded', async function () {
+    const titleElement = document.getElementById("modalTitle");
+    const contentElement = document.getElementById("modalContent");
+    const questionsElement = document.getElementById("modalQuestion");
+
+    // 获取当前页面的 URL 查询字符串
+    const queryString = window.location.search;
+
+    // 创建 URLSearchParams 对象以解析查询字符串
+    const urlParams = new URLSearchParams(queryString);
+
+    const course_id = urlParams.get("courseID");
+
+    const courseData = await DB_API.getCourseData(course_id);
+  
+    // 获取相应的数据，例如根据 courseBox 内的 subject 获取数据
+    const subject = courseData.subject; // 从 h2 元素中获取 subject
+    const topic = courseData.topic; // 从 h2 元素中获取 subject
+  
+    const courseQuestion =  await DB_API.getQuestion(course_id);
+  
+  
+    // 将原始数据显示在模态对话框中，包装在<span>中
+    titleElement.innerHTML = `<span>科目  ${subject}</span>`;
+    contentElement.innerHTML = `<span><br>探討主題<br></span><span><br>${topic}</span>`;
+  
+    // 清空原始的问题内容
+    questionsElement.innerHTML = "";
+  
+    // 使用forEach循环遍历courseQuestion数组并添加每个问题
+    courseQuestion.forEach((question, index) => {
+        const questionElement = document.createElement("span");
+        questionElement.innerHTML = `<span><br><br>問題 ${index + 1}<br></span><span><br>${question}<br><br></span>`;
+
+        // const answerTextarea = document.createElement("textarea");
+        // answerTextarea.className = "answers";
+        // answerTextarea.placeholder = "請輸入答案";
+        // questionElement.appendChild(answerTextarea);
+  
+        // 将问题元素添加到questionsElement中
+        questionsElement.appendChild(questionElement);
+        
+    });
+  
+});

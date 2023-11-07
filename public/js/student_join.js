@@ -1,7 +1,10 @@
+
 // 获取元素
 const selectElement = document.getElementById("room");
 const roomContentElement = document.getElementById("roomContent");
 const submitButton = document.getElementById("startChatButton");
+const courseIDInput = document.getElementById("courseID");
+
 
 const fetchCourseID = async () =>{
     const userID = sessionStorage.getItem('userId');
@@ -53,6 +56,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 var topicDiv = document.createElement("div");
                 topicDiv.innerHTML = `探討主題: ${courseData.topic}`;
                 roomContentElement.appendChild(topicDiv);
+
+                courseIDInput.value = courseroomanddata.courseID;
 
             }
         }))

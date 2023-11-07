@@ -123,7 +123,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 
             const sendBtn = document.getElementById("sendBtn");
-            const answers = document.querySelectorAll(".answers");
       
 
             const courseQuestion =  await DB_API.getQuestion(course_id);
@@ -132,11 +131,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             const checkmember = await DB_API.checkCourseMember(course_id, account);
 
-            // if (checkmember === 'hide') {
-            //     sendBtn.style.display = "none";
-            // } else if (checkmember === 'show') {
-            //     sendBtn.style.display = "flex";
-            // }
 
             // 将原始数据显示在模态对话框中，包装在<span>中
             titleElement.innerHTML = `<span>科目  ${subject}</span>`;
@@ -154,17 +148,16 @@ document.addEventListener('DOMContentLoaded', async function() {
                     sendBtn.style.display = "none";
                 } else if(checkmember === 'show'){
                     // 创建<textarea>元素
-                const answerTextarea = document.createElement("textarea");
-                answerTextarea.className = "answers";
-                answerTextarea.placeholder = "請輸入答案";
-                // 将<textarea>元素添加到问题元素中
-                questionElement.appendChild(answerTextarea);
-                sendBtn.style.display = "flex";
+                    const answerTextarea = document.createElement("textarea");
+                    answerTextarea.className = "answers";
+                    answerTextarea.placeholder = "請輸入答案";
+                    // 将<textarea>元素添加到问题元素中
+                    questionElement.appendChild(answerTextarea);
+                    sendBtn.style.display = "flex";
                 }
+
                 // 将问题元素添加到questionsElement中
                 questionsElement.appendChild(questionElement);
-               
-    
                 
             });
 
@@ -193,11 +186,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         }
     });
-    // // 关闭模态对话框的按钮
-    // document.querySelector(".close").addEventListener("click", function() {
-    // const modal = document.getElementById("courseModal");
-    // modal.style.display = "none";
-    // });
+    
 });
 
 

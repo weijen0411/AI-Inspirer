@@ -239,11 +239,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             
     
     });
-    // 关闭模态对话框的按钮
-    // document.querySelector(".close").addEventListener("click", function() {
-    // const modal = document.getElementById("courseModal");
-    // modal.style.display = "none";
-    // });
+
 });
 
 
