@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
     var roomusers = getRoomUsers(room);
     var roomuserCount = (roomusers === null) ? 0 : roomusers.length;
     
-    if (roomuserCount < 2){
+    if (roomuserCount < 5){
     const user = userJoin(socket.id, username, room);
     socket.join(user.room);
 
@@ -59,7 +59,7 @@ io.on("connection", (socket) => {
       room: user.room,
       users: getRoomUsers(user.room),
     });
-    } else if(roomuserCount >=2){
+    } else if(roomuserCount >=5){
       console.log('Room is full');
       socket.emit('loginFail', '')
     }
