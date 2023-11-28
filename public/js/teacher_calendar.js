@@ -3,6 +3,7 @@ sessionStorage.setItem('start', "");
 sessionStorage.setItem('end', "");
 sessionStorage.setItem('eventId', "");
 
+
 document.addEventListener('DOMContentLoaded', async function() {
   var calendarEl = document.getElementById('calendar');
   const userEventDate = await DB_API.getEventData(userId);

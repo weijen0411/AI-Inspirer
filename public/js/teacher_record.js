@@ -3,6 +3,7 @@ const nametInput = document.querySelector('#name');
 const accountInput = document.querySelector('#account');
 const passwordInput = document.querySelector('#password');
 
+
 const fetchData = async () =>{
     const account = sessionStorage.getItem('account');
     const write = await DB_API.getTeacherdata(account);

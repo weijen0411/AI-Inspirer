@@ -10,6 +10,33 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.9/locales/zh-tw.global.js'></script>
+    <script>
+
+      // 使用 JavaScript 获取当前网址
+      var currentURL = window.location.href;
+        
+      // 找到 ".app" 的部分并获取其前面的内容
+      var endIndex = currentURL.indexOf(".app") + 4; // 找到 ".app" 的索引并加上长度 ".app".length = 4
+      var desiredPart = currentURL.substring(0, endIndex) + '/listener2Url';
+
+      fetch(desiredPart)
+        .then(response => response.json())
+        .then(data => {
+            // 從返回的數據中取得 ngrok 的 public_url
+            const publicUrl = data.url;
+
+            // 在你的 HTML 文件中找到相應的連結元素
+            const ngrokLink = document.getElementById('ngrok-link');
+
+            // 將連結的 href 屬性設置為 ngrok 提供的 public_url
+            ngrokLink.href = publicUrl;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+        
+
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark "style="background-color: #cfb59d;">
