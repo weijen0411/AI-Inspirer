@@ -2,8 +2,6 @@
 const nametInput = document.querySelector('#name');
 const accountInput = document.querySelector('#account');
 const passwordInput = document.querySelector('#password');
-const ngrokLink = document.getElementById("ngrok-link");
-ngrokLink.href = ngrokUrl;
 
 const fetchData = async () =>{
     const account = sessionStorage.getItem('account');

@@ -3,8 +3,6 @@ const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 const inputMsg = document.getElementById('msg');
-const ngrokLink = document.getElementById("ngrok-link");
-ngrokLink.href = ngrokUrl;
 
 // Get username and room from URL
 const { username, room } = Qs.parse(location.search, {

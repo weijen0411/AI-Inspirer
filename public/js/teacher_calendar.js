@@ -2,8 +2,6 @@ const userId = sessionStorage.getItem('userId');
 sessionStorage.setItem('start', "");
 sessionStorage.setItem('end', "");
 sessionStorage.setItem('eventId', "");
-const ngrokLink = document.getElementById("ngrok-link");
-ngrokLink.href = ngrokUrl;
 
 document.addEventListener('DOMContentLoaded', async function() {
   var calendarEl = document.getElementById('calendar');
