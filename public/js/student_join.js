@@ -4,7 +4,8 @@ const selectElement = document.getElementById("room");
 const roomContentElement = document.getElementById("roomContent");
 const submitButton = document.getElementById("startChatButton");
 const courseIDInput = document.getElementById("courseID");
-
+const ngrokLink = document.getElementById("ngrok-link");
+ngrokLink.href = ngrokUrl;
 
 const fetchCourseID = async () =>{
     const userID = sessionStorage.getItem('userId');
