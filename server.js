@@ -3,6 +3,7 @@ const axios = require('axios');
 const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
+const ngrok = require("@ngrok/ngrok");
 const formatMessage = require("./utils/messages");
 const createAdapter = require("@socket.io/redis-adapter").createAdapter;
 const redis = require("redis");
@@ -17,8 +18,37 @@ const {
 
 const url = 'http://127.0.0.1:7861/chat/chat';
 const app = express();
+const cors = require('cors');
+app.use(cors());
+const fetch = require('node-fetch');
 const server = http.createServer(app);
 const io = socketio(server);
+
+
+let listener2Url = '';
+
+(async function () {
+  const listener1 = await ngrok.connect({
+      addr: 3000,
+      authtoken: '2Un0UTeJU14fjN9fABZKqv4Xsqj_5cWrUq7KQCWhJmCb9jj6p',
+  });
+
+  const listener2 = await ngrok.connect({
+    addr: 8501,
+    authtoken: '2Un0UTeJU14fjN9fABZKqv4Xsqj_5cWrUq7KQCWhJmCb9jj6p',
+});
+
+  console.log(`Ingress established at port 3000: ${listener1.url()}`);
+  console.log(`Ingress established at port 8501: ${listener2.url()}`);
+
+  listener2Url = listener2.url();
+
+})();
+
+app.get('/listener2Url', (req, res) => {
+  // 直接返回全局变量 listener2Url 的值
+  res.json({ url: listener2Url });
+});
 
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")));
@@ -110,7 +140,7 @@ io.on("connection", (socket) => {
     const user = userLeave(socket.id);
 
     if (user) {
-      io.to(user.room).emit(
+      io.to(user.room).emit(  
         "message",
         formatMessage(`${botName}`, `${user.username} 離開了討論室`)
       );
@@ -125,6 +155,22 @@ io.on("connection", (socket) => {
 });
 
 const PORT = process.env.PORT || 3000;
+
+
+app.get('/ngrok-url', async (req, res) => {
+  try {
+      const response = await fetch('http://localhost:4040/api/tunnels/second', {
+        method: 'GET'
+      });
+      const data = await response.json();
+      const publicUrl = data.public_url;
+
+      res.json({ publicUrl });
+  } catch (error) {
+      console.log('Error fetching ngrok URL:', error);
+      res.status(500).json({ error: 'Unable to fetch ngrok URL' });
+  }
+});
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 

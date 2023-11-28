@@ -1,7 +1,5 @@
 const account = sessionStorage.getItem('account');
 var modal = document.getElementById("courseModal");
-const ngrokLink = document.getElementById("ngrok-link");
-ngrokLink.href = ngrokUrl;
 
 document.addEventListener('DOMContentLoaded', async function() {
     const courses = await DB_API.getCourses();

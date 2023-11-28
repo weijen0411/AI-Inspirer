@@ -1,6 +1,5 @@
 const account = sessionStorage.getItem('account');
-const ngrokLink = document.getElementById("ngrok-link");
-ngrokLink.href = ngrokUrl;
+
 
 // 获取打开和关闭 modal dialog 的元素
 var openModalButton = document.getElementById("addCourse");

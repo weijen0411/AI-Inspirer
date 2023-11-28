@@ -5,11 +5,15 @@ redis 啟動 (cmd)
 
 2. redis-server.exe redis.windows.conf
 
+3. ngrok http 3000 (架網站)
+
+
 project 啟動 (cmd)
 
 1. cd D:\final_project\chatroom (進到自己的chatroom資料夾)
 
 2. node server.js
+
 
 llm 啟動 (anaconda)
 
