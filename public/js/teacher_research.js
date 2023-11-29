@@ -4,11 +4,18 @@ const account = sessionStorage.getItem('account');
 var openModalButton = document.getElementById("addCourse");
 var modal = document.getElementById("myModal");
 var modalcontent = document.getElementById("addmodal");
+var coursesSequence = document.getElementById("coursesSequence");
 
 // 点击 "新增课程" 按钮时打开 modal dialog
-openModalButton.onclick = function() {
+openModalButton.onclick = async function() {
+
+    const coursesQuantity = await DB_API.getCoursesQuantity();
+
     modal.style.display = "block";
     modalcontent.style.left = "50%";
+
+    coursesSequence.textContent = `組別 : 第${coursesQuantity + 1 }組`;
+
 }
 
 // 当用户点击 modal 之外的区域时关闭 modal
@@ -27,7 +34,7 @@ cancelButton.onclick = function() {
 
 document.addEventListener('DOMContentLoaded', async function() {
     const courses = await DB_API.getCourses();
-    console.log(courses);
+
     // 遍歷courses數組，獲取每個物件中的topic和subject
     courses.forEach(course => {
         const topic = course.topic;
@@ -113,9 +120,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             const course_id = courseBox.getAttribute("id");
             const courseData = await DB_API.getCourseData(course_id);
 
-
             const subject = courseData.subject;
             const topic = courseData.topic;
+            const room = courseData.room;
 
             const courseQuestion =  await DB_API.getQuestion(course_id);
 
@@ -123,7 +130,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             // 将原始数据显示在模态对话框中，包装在<span>中
             titleElement.innerHTML = `<span>科目  ${subject}</span>`;
-            contentElement.innerHTML = `<span><br>探討主題<br></span><span><br>${topic}</span>`;
+            contentElement.innerHTML = `<span><br>組別 ${room}<br></span>`;
+            contentElement.innerHTML += `<span><br>探討主題<br></span><span><br>${topic}<br><br></span>`;
 
             // 清空原始的问题内容
             questionsElement.innerHTML = "";
@@ -286,6 +294,8 @@ document.getElementById("createBtn").addEventListener("click", async function() 
     var allTextareasFilled = true;
     var questionsAndAnswers = [];
 
+    const coursesQuantity = await DB_API.getCoursesQuantity();
+
     questionTextareas.forEach(function(textarea) {
         if (textarea.value.trim() === "") {
           allTextareasFilled = false;
@@ -314,7 +324,8 @@ document.getElementById("createBtn").addEventListener("click", async function() 
         const courseData = {
             subject: selectedText,
             teacher: teacherData.name,
-            topic: topicValue
+            topic: topicValue,
+            room: `第${coursesQuantity + 1}組`
         };
         
         questionsAndAnswers.forEach(function (question, index) {
@@ -330,3 +341,4 @@ document.getElementById("createBtn").addEventListener("click", async function() 
         alert("请填写所有问题和答案。");
   }
 });
+
