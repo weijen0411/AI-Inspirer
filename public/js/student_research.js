@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             // 获取相应的数据，例如根据 courseBox 内的 subject 获取数据
             const subject = courseData.subject; // 从 h2 元素中获取 subject
             const topic = courseData.topic; // 从 h2 元素中获取 subject
+            const room = courseData.room;
 
 
             const sendBtn = document.getElementById("sendBtn");
@@ -134,7 +135,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             // 将原始数据显示在模态对话框中，包装在<span>中
             titleElement.innerHTML = `<span>科目  ${subject}</span>`;
-            contentElement.innerHTML = `<span><br>探討主題<br></span><span><br>${topic}</span>`;
+            contentElement.innerHTML = `<span><br>組別 ${room}<br></span>`;
+            contentElement.innerHTML += `<span><br>探討主題<br></span><span><br>${topic}<br><br></span>`;
 
             // 清空原始的问题内容
             questionsElement.innerHTML = "";

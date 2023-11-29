@@ -249,6 +249,19 @@ class API {
         }
     }
 
+    async getCoursesQuantity() {
+        try {
+
+            const coursesCollection = await db.collection("courses").get();
+            const numberOfDocuments = coursesCollection.size;
+            return numberOfDocuments;
+            
+          } catch (error) {
+            console.error("獲取數量錯誤 : ", error);
+            throw error; // 可以选择抛出错误以便在调用方处理
+          }
+    }
+
     async addCourses(coursesData) {
         try {
             const dbref = await db.collection('courses').doc();
