@@ -1,11 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans+TC);
-body {
+#home {
     background-color:#2f2e2e;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
 }
 nav ul {
     list-style-type: none;
-    margin: 0;
     padding: 0;
+    margin-top: 30px;
     margin-left: 7em;
 }
 
@@ -16,8 +19,8 @@ nav ul li {
     cursor:pointer;
     border: 0.3em solid var(--c);
     border-radius: 0.5em;
-    width: 15em;
-    height: 3em;
+    width: 16em;
+    height: 3.5em;
     margin-top: 30px;
     text-transform: uppercase;
     font-weight: bold;
@@ -29,7 +32,7 @@ nav ul li {
     overflow: hidden;
     z-index: 1;
     transition: 0.5s;
-    margin: 1em;
+    /* margin: 0.5em; */
 }
 
 nav ul li span {
@@ -72,12 +75,12 @@ nav ul li span:nth-child(4) {
 
 .button{
     position: relative;
-    width: 60px;
-    height: 20px;
+    /* width: 70px;
+    height: 20px; */
     background-color: #cfb59d;
-    margin-top: 5px;
-    margin-left: 50em;
-    border-radius: 4em;
+    /* margin-bottom: 20px; */
+    margin-left: 45em;
+    border-radius: 20px;
     font-size: 21px;
     font-weight: bold;
     font-family: sans-serif;
@@ -92,8 +95,10 @@ nav ul li span:nth-child(4) {
   }
   
 .button:hover {
-    transition-duration: 0.1s;
+    transition-duration: 0.7s;
+    border-radius: 90px;
     background-color: #e7d6c6;
+    color: #2f2e2e
   }
   
 .button:after {
@@ -101,6 +106,8 @@ nav ul li span:nth-child(4) {
     display: block;
     position: absolute;
     border-radius: 4em;
+    transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s; /* Safari */
     left: 0;
     top:0;
     width: 100%;
@@ -125,6 +132,7 @@ nav ul li span:nth-child(4) {
   }
 
 .container-index {
+    /* margin-top: 20px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -143,9 +151,12 @@ nav ul li span:nth-child(4) {
 
 .pic {
     width: 50%;
-    /* height: 75%; */
+    height: 75%;
     margin-right: 35%;
     margin-top: 20%;
+}
+img{
+    max-width: 50%;
 }
   
  

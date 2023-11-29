@@ -43,6 +43,9 @@ body {
     margin-left: 5%;
     margin-top: 20%;
 }
+img{
+  max-width: 50%;
+}
 
 .logintext {
     font-size: 55px;
@@ -145,6 +148,8 @@ body {
   text-transform: uppercase;
   font-display: swap;
   text-shadow: 0 0 10px #204872;
+  margin-top: 2rem;
+  margin-bottom: 7rem;
 }
 
 .jt__row {
