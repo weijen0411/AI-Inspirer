@@ -17,23 +17,23 @@
       var endIndex = currentURL.indexOf(".app") + 4; // 找到 ".app" 的索引并加上长度 ".app".length = 4
       var desiredPart = currentURL.substring(0, endIndex) + '/listener2Url';
 
+      var newURL = '';
+
       fetch(desiredPart)
         .then(response => response.json())
         .then(data => {
             // 從返回的數據中取得 ngrok 的 public_url
             const publicUrl = data.url;
-
-            // 在你的 HTML 文件中找到相應的連結元素
-            const ngrokLink = document.getElementById('ngrok-link');
-
-            // 將連結的 href 屬性設置為 ngrok 提供的 public_url
-            ngrokLink.href = publicUrl;
+            newURL = publicUrl;
         })
         .catch(error => {
             console.error('Error fetching data:', error);
         });
         
-
+        function openNewPage() {
+          // 使用 window.open() 方法打开新窗口或选项卡
+          window.open(newURL, '_blank');
+        }
     </script>
 </head>
 
@@ -50,7 +50,7 @@
           <span></span><span></span><span></span><span></span>
         </li>
         <li>
-          <buttin onclick="window.location.href=''">問答
+          <buttin onclick="openNewPage()">問答
           <span></span><span></span><span></span><span></span>
         </li>
         <li>

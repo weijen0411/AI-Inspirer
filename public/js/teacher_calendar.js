@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             const writePromise = await DB_API.addEventData(userId, eventData);
             
             if (writePromise) {
-              location.assign('./tescher_calendar.html'); // 寫入成功後進行導航
+              location.assign('./teacher_calendar.html'); // 寫入成功後進行導航
             }
           }
         }
