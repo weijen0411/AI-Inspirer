@@ -30,7 +30,7 @@ socket.on('loginFail', function(){
 
 // Message from server
 socket.on('message', (message) => {
-  console.log(message);
+  // console.log(message);
   outputMessage(message);
 
   // Scroll down

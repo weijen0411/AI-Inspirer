@@ -105,25 +105,29 @@ io.on("connection", (socket) => {
   // Listen for botChatMessage
   socket.on("botChatMessage", (msg) => {
     const user = getCurrentUser(socket.id);
-    
+    const ask = "請使用繁體中文回答。" + msg;
+
     const data = {
-      query: msg,
+      query: ask,
       // history: [
-      //   { role: 'user', content: '你好，请告诉我今天的天气。' },
-      //   { role: 'assistant', content: '今天的天气是晴朗的。' },
+      //   { role: 'user', content: '您好，請使用繁體中文回答我所有的問題!' },
+      //   { role: 'assistant', content: '好的!' },
       // ],
-      stream: true, // 如果希望流式输出，设置为 true
+      stream: false, // 如果希望流式输出，设置为 true
     };
+
+    io.to(user.room).emit("message", formatMessage(`${user.username}`, msg));
     
     axios
     .post(url, data)
     .then((response) => {
       if (response.status === 200) {
         // 处理模型生成的对话
-        response.data.split('\n').forEach((chunk) => {
-         io.to(user.room).emit("message", formatMessage(`${botName}`, chunk));
+        // response.data.split('\n').forEach((chunk) => {
+        //  io.to(user.room).emit("message", formatMessage(`${botName}`, chunk));
           
-        });
+        // });
+        io.to(user.room).emit("message", formatMessage(`${botName}`, response.data));
       } else {
         console.error(`错误响应：${response.status}`);
       }
@@ -132,7 +136,7 @@ io.on("connection", (socket) => {
       console.error('请求出错:', error);
     });
 
-    io.to(user.room).emit("message", formatMessage(`${user.username}`, msg));
+
   });
 
   // Runs when client disconnects
